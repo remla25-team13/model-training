@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.10.7-slim
+FROM python:3.12.9-slim
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y git \ 
