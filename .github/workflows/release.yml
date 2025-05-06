@@ -1,9 +1,9 @@
 name: Release Model
 
-on:
-  push:
-    tags:
-      - 'v*.*.*'  # e.g., v1.0.0
+on: push
+#  push:
+#    tags:
+#      - 'v*.*.*'  # e.g., v1.0.0
 
 jobs:
   release:
@@ -31,6 +31,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: model-artefact
-        path: |
-          sentiment_model.pkl
-          bow_vectorizer.pkl
+        path: sentiment_model.pkl
+    - name: Upload vectorizer artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: vectorizer-artefact
+        path: bow_vectorizer.pkl
