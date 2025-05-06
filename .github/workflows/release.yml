@@ -31,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: model-artefact
-        path: sentiment_model.pkl
+        path: sentiment_model.*
     - name: Upload vectorizer artifacts
       uses: actions/upload-artifact@v4
       with:
