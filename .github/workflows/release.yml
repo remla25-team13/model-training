@@ -29,6 +29,7 @@ jobs:
 
     - name: Upload model artifacts
       uses: actions/upload-artifact@v4
+      path: "./"
       with:
         files: |
           sentiment_model.pkl
