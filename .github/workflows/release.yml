@@ -1,9 +1,9 @@
 name: Release Model
 
-on: push
-#  push:
-#    tags:
-#      - 'v*.*.*'  # e.g., v1.0.0
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # e.g., v1.0.0
 
 jobs:
   release:
