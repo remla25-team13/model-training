@@ -1,5 +1,8 @@
 # model-training
 
+![Build](https://github.com/remla25-team13/model_training/actions/workflows/ci.yml/badge.svg)
+
+
 This repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.
 
 ## Features
