@@ -26,7 +26,7 @@ jobs:
 
       - name: build models in worker
         run: |
-          python model_analysis.py
+          python ./training/model_analysis.py
 
 
       #basic pytest and pylint, will be extended later
