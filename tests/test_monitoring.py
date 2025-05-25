@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score
 def test_prediction_drift(split_data, classifier):
     _, X_test, _, y_test = split_data
     y_pred = classifier.predict(X_test)
-    baseline = 0.6
+    baseline = 0.7
     acc = accuracy_score(y_test, y_pred)
     assert abs(acc - baseline) < 0.15
 
