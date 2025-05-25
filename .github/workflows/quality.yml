@@ -26,6 +26,8 @@ jobs:
 
       #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest --cov=training tests/  
 
