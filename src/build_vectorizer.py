@@ -1,3 +1,5 @@
+"""Build vectorizer"""
+
 import os
 import joblib
 
@@ -13,7 +15,8 @@ corpus = joblib.load('output/corpus.jbl')
 cv = CountVectorizer(max_features=MAX_FEATURES)
 
 X = cv.fit_transform(corpus).toarray()
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RNG_STATE)
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+    test_size=TEST_SIZE, random_state=RNG_STATE)
 
 joblib.dump(cv, 'output/vectorizer.jbl')
 joblib.dump(X_train, 'output/splits/X_train.jbl')

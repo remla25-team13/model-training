@@ -3,10 +3,9 @@
 import joblib
 import pandas as pd
 
-import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-from tqdm import tqdm, trange
+from tqdm import trange
 
 from lib_ml import Preprocessor
 

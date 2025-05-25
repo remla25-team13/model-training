@@ -1,7 +1,7 @@
-import os
+"""Train model(s)"""
+
 import joblib
 
-from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 
 X = joblib.load('output/splits/X_train.jbl')
