@@ -2,7 +2,6 @@
 
 import pickle
 import joblib
-import nltk
 import pandas as pd
 
 from sklearn.feature_extraction.text import CountVectorizer
