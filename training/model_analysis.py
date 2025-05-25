@@ -2,10 +2,7 @@
 
 import pickle
 import joblib
-import nltk
 import pandas as pd
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import confusion_matrix, accuracy_score
@@ -14,44 +11,50 @@ from sklearn.naive_bayes import GaussianNB
 
 from lib_ml import Preprocessor
 
-# Load dataset and stopwords
-dataset = pd.read_csv('a1_RestaurantReviews_HistoricDump.tsv', delimiter='\t', quoting=3)
-nltk.download('stopwords')
+def load_data(filepath='a1_RestaurantReviews_HistoricDump.tsv'):
+    '''Load dataset and stopwords'''
+    dataset = pd.read_csv(filepath, delimiter='\t', quoting=3)
+    return dataset
 
-preprocessor = Preprocessor()
-ps = PorterStemmer()
-all_stopwords = stopwords.words('english')
-all_stopwords.remove('not')
+def preprocess_data(dataset, max_features=1420):
+    '''Preprocess data'''
+    corpus = []
+    for i in range(0, 900):
+        review = dataset['Review'][i]
+        review = Preprocessor().preprocess(review)
+        corpus.append(review)
 
-# Preprocess reviews
-corpus = []
-for i in range(0, 900):
-    review = dataset['Review'][i]
-    review = preprocessor.preprocess(review)
-    corpus.append(review)
+    vectorizer = CountVectorizer(max_features=max_features)
+    x = vectorizer.fit_transform(corpus).toarray()
+    y = dataset.iloc[:, -1].values  # Match indices used in corpus
 
-# Convert text to features
-cv = CountVectorizer(max_features=1420)
-X = cv.fit_transform(corpus).toarray()
-y = dataset.iloc[:, -1].values
+    with open('bow_vectorizer.pkl', "wb") as f:
+        pickle.dump(vectorizer, f)
 
-# Save the BoW vectorizer
-BOW_PATH = 'bow_vectorizer.pkl'
-with open(BOW_PATH, "wb") as f:
-    pickle.dump(cv, f)
+    return x, y
 
-# Train/test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
+def train_model(x, y):
+    '''Function which handles thhe training of the model'''
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
+    classifier = GaussianNB()
+    classifier.fit(x_train, y_train)
 
-# Train classifier
-classifier = GaussianNB()
-classifier.fit(X_train, y_train)
+    joblib.dump(classifier, 'sentiment_model.pk1')
+    return classifier, x_test, y_test
 
-# Save model
-joblib.dump(classifier, 'sentiment_model.pk1')
 
-# Evaluate
-y_pred = classifier.predict(X_test)
-cm = confusion_matrix(y_test, y_pred)
-print(cm)
-print("Accuracy:", accuracy_score(y_test, y_pred))
+def evaluate_model(classifier, x_test, y_test):
+    '''Function to evaluate a classifier'''
+    y_pred = classifier.predict(x_test)
+    print(confusion_matrix(y_test, y_pred))
+    print("Accuracy:", accuracy_score(y_test, y_pred))
+
+def run_pipeline():
+    '''Function to run a model training pipeline'''
+    dataset = load_data()
+    x, y = preprocess_data(dataset)
+    classifier, x_test, y_test = train_model(x, y)
+    evaluate_model(classifier, x_test, y_test)
+
+if __name__ == "__main__":
+    run_pipeline()
