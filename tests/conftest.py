@@ -10,6 +10,8 @@ import joblib
 from lib_ml import Preprocessor
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
+from training import model_analysis
+
 
 MODEL_PATH = "sentiment_model.pk1"
 VECTORIZER_PATH = "bow_vectorizer.pkl"
@@ -17,7 +19,7 @@ VECTORIZER_PATH = "bow_vectorizer.pkl"
 @pytest.fixture(scope="session")
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
-    subprocess.run(["python", "../training/train_model.py"], capture_output=True, text=True)
+    model_analysis.run_pipeline()
     assert os.path.exists(MODEL_PATH), "Model file not created"
     assert os.path.exists(VECTORIZER_PATH), "Vectorizer file not created"
 
