@@ -5,7 +5,6 @@ import joblib
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import confusion_matrix, accuracy_score
