@@ -16,7 +16,7 @@ from training import model_analysis
 MODEL_PATH = "sentiment_model.pk1"
 VECTORIZER_PATH = "bow_vectorizer.pkl"
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
     model_analysis.run_pipeline()
