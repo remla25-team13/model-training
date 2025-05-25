@@ -54,6 +54,5 @@ def split_data(X_y):
 
 @pytest.fixture(scope="session")
 def classifier(split_data):
-    X_train, _, y_train, _ = split_data
     clf = joblib.load('sentiment_model.pk1')
     return clf
