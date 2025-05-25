@@ -24,11 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: build models in worker
-        run: |
-          python ./training/model_analysis.py
-
-
       #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
         run: |
