@@ -1,0 +1,34 @@
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+    - src/get_data.py
+  preprocess:
+    cmd: python src/preprecessing.py
+    deps:
+    - src/preprecessing.py
+    outs:
+    - output/corpus.jbl
+    - output/labels.jbl
+  vectorize:
+    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python src/build_vectorizer.py
+    deps:
+    - src/build_vectorizer.py
+    outs:
+    - output/vectorizer.jbl
+    - output/splits/X_train.jbl
+    - output/splits/X_test.jbl
+    - output/splits/y_train.jbl
+    - output/splits/y_test.jbl
+  train:
+    cmd: python src/train_model.py
+    deps:
+    - src/train_model.py
+    outs:
+    - output/model.jbl
+  analyze:
+    cmd: python src/get_metrics.py
+    deps: 
+    - src/get_metrics.py
+    outs:
+    - output/metrics.txt

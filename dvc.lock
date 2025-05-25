@@ -1,0 +1,89 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+    - path: src/get_data.py
+      hash: md5
+      md5: f1dc51f2abef6e1bd3bc0e5ae0f49f6e
+      size: 73
+  preprocess:
+    cmd: python src/preprecessing.py
+    deps:
+    - path: src/preprecessing.py
+      hash: md5
+      md5: 99d3136cec3867317843fb1ce9d76298
+      size: 680
+    outs:
+    - path: output/corpus.jbl
+      hash: md5
+      md5: 0a3d0a1186d497f10f6386d1b6128806
+      size: 52873
+    - path: output/labels.jbl
+      hash: md5
+      md5: ac35b1db244501fc47c46a01943edece
+      size: 17201
+  vectorize:
+    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python src/build_vectorizer.py
+    deps:
+    - path: src/build_vectorizer.py
+      hash: md5
+      md5: d60ff95a3df6894962debe9bf2dc1aff
+      size: 787
+    outs:
+    - path: output/splits/X_test.jbl
+      hash: md5
+      md5: cc6ac28fcd8f1ee8c1bd73a9bdb34e81
+      size: 2045041
+    - path: output/splits/X_train.jbl
+      hash: md5
+      md5: 4e261c0acea445cd1e78ee4161d911be
+      size: 8179441
+    - path: output/splits/y_test.jbl
+      hash: md5
+      md5: 5b62246a647caffc0f34b6bfcccd6d85
+      size: 3521
+    - path: output/splits/y_train.jbl
+      hash: md5
+      md5: acb039f01b537270cbbb180f012669f7
+      size: 13781
+    - path: output/vectorizer.jbl
+      hash: md5
+      md5: 5f51ba1731c005a1a5b429c662dcc1ba
+      size: 53584
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: src/train_model.py
+      hash: md5
+      md5: 72a1aeb2bd8bef4e881d68d3dc35150d
+      size: 305
+    outs:
+    - path: output/model.jbl
+      hash: md5
+      md5: 9e790da96c29cde291945ba5a313983b
+      size: 46215
+  train:
+    cmd: python src/train_model.py
+    deps:
+    - path: src/train_model.py
+      hash: md5
+      md5: 72a1aeb2bd8bef4e881d68d3dc35150d
+      size: 305
+    outs:
+    - path: output/model.jbl
+      hash: md5
+      md5: 9e790da96c29cde291945ba5a313983b
+      size: 46215
+  analyze:
+    cmd: python src/get_metrics.py
+    deps:
+    - path: src/get_metrics.py
+      hash: md5
+      md5: 9a9755c3deb75d05835351490d0c1a94
+      size: 550
+    outs:
+    - path: output/metrics.txt
+      hash: md5
+      md5: 6ccbbe54635f0472400a14aea5863e53
+      size: 93
