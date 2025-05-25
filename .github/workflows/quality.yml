@@ -27,11 +27,11 @@ jobs:
       #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
         run: |
-          pytest --cov=training tests/  
+          pytest --cov=src tests/  
 
       - name: Run pylint
         run: |
-          pylint training 
+          pylint src 
           
       - name: Generate coverage report
         run: |
