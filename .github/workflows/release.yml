@@ -25,15 +25,15 @@ jobs:
 
     - name: Run training
       run: |
-        python model_analysis.py
+        dvc repro
 
     - name: Upload model artifacts
       uses: actions/upload-artifact@v4
       with:
         name: model-artefact
-        path: sentiment_model.*
+        path: output/model.jbl
     - name: Upload vectorizer artifacts
       uses: actions/upload-artifact@v4
       with:
         name: vectorizer-artefact
-        path: bow_vectorizer.pkl
+        path: output/vectorizer.jbl

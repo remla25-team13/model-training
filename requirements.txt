@@ -11,3 +11,4 @@ tqdm
 pylint
 flake8
 bandit
+dvc
