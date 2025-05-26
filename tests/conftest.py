@@ -5,7 +5,11 @@ import joblib
 from lib_ml import Preprocessor
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
-from training import get_data
+from training.get_data import get_data
+from training.preprocessing import preprocess
+from training.build_vectorizer import build_vectorizer
+from training.train_model import train
+from training.get_metrics import get_metrics
 
 
 MODEL_PATH = "output/model.jbl"
@@ -15,7 +19,13 @@ DATASET_PATH = "output/reviews.tsv"
 @pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
-    get_data.get_data()
+    
+    get_data()
+    preprocess()
+    build_vectorizer()
+    train()
+    get_metrics()
+
     assert os.path.exists(MODEL_PATH), "Model file not created"
     assert os.path.exists(VECTORIZER_PATH), "Vectorizer file not created"
 
