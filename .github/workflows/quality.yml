@@ -33,7 +33,7 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint training 
+          pylint training
           
       - name: Generate coverage report
         run: |

@@ -2,11 +2,12 @@ notebook
 pandas
 nltk
 scikit-learn
-joblib==1.4.2
+joblib
 lib_ml @ git+https://github.com/remla25-team13/lib-ml.git@v0.1.1
 pytest
 pytest-cov
 pylint
+tqdm
 pylint
 flake8
 bandit

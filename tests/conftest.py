@@ -1,31 +1,37 @@
 import pytest
 import pandas as pd
-import numpy as np
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
 import os
-import subprocess
-import pickle
 import joblib
 from lib_ml import Preprocessor
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
-from training import model_analysis
+from training.get_data import get_data
+from training.preprocessing import preprocess
+from training.build_vectorizer import build_vectorizer
+from training.train_model import train
+from training.get_metrics import get_metrics
 
 
-MODEL_PATH = "sentiment_model.pk1"
-VECTORIZER_PATH = "bow_vectorizer.pkl"
+MODEL_PATH = "output/model.jbl"
+VECTORIZER_PATH = "output/vectorizer.jbl"
+DATASET_PATH = "output/reviews.tsv"
 
 @pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
-    model_analysis.run_pipeline()
+    
+    get_data()
+    preprocess()
+    build_vectorizer()
+    train()
+    get_metrics()
+
     assert os.path.exists(MODEL_PATH), "Model file not created"
     assert os.path.exists(VECTORIZER_PATH), "Vectorizer file not created"
 
 @pytest.fixture(scope="session")
 def dataset():
-    return pd.read_csv('a1_RestaurantReviews_HistoricDump.tsv', delimiter='\t', quoting=3)
+    return pd.read_csv(DATASET_PATH, delimiter='\t', quoting=3)
 
 @pytest.fixture(scope="session")
 def preprocessor():
@@ -54,5 +60,5 @@ def split_data(X_y):
 
 @pytest.fixture(scope="session")
 def classifier(split_data):
-    clf = joblib.load('sentiment_model.pk1')
+    clf = joblib.load(MODEL_PATH)
     return clf
