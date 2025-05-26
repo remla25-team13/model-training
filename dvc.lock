@@ -1,28 +1,31 @@
 schema: '2.0'
 stages:
   get_data:
-    cmd: python src/get_data.py
-    deps:
-    - path: src/get_data.py
-      hash: md5
-      md5: 064a90d682189a022dcb5a9c31d6e4b2
-      size: 135
-  preprocess:
-    cmd: python src/preprecessing.py
-    deps:
-    - path: src/preprecessing.py
-      hash: md5
-      md5: 64322075135983834013bca861db6551
-      size: 862
+    cmd: wget -O a1_RestaurantReviews_HistoricDump.tsv 
+      https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
     outs:
-    - path: output/corpus.jbl
+    - path: a1_RestaurantReviews_HistoricDump.tsv
       hash: md5
-      md5: 0a3d0a1186d497f10f6386d1b6128806
-      size: 52873
-    - path: output/labels.jbl
+      md5: 102f1f4193e0bdebdd6cce7f13e0a839
+      size: 54686
+  preprocess:
+    cmd: python -m review_rating.modeling prepare a1_RestaurantReviews_HistoricDump.tsv
+      -o output -t 0.1
+    deps:
+    - path: review_rating/
       hash: md5
-      md5: ac35b1db244501fc47c46a01943edece
-      size: 17201
+      md5: 1b4e10766a2b45a150c43ff9d64ba4dd.dir
+      size: 53362
+      nfiles: 26
+    outs:
+    - path: output/processed_data.pk1
+      hash: md5
+      md5: 6be8c05aa5c9bab7db095e9564dc6288
+      size: 10231603
+    - path: output/vectorizer.pkl
+      hash: md5
+      md5: c37cd6f96a4f9e61c02ed8b119b380ef
+      size: 40162
   vectorize:
     cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python src/build_vectorizer.py
     deps:
@@ -64,26 +67,30 @@ stages:
       md5: 9e790da96c29cde291945ba5a313983b
       size: 46215
   train:
-    cmd: python src/train_model.py
+    cmd: python -m review_rating.modeling train --input-dir output --output-model
+      output/model.pkl
     deps:
-    - path: src/train_model.py
+    - path: review_rating/
       hash: md5
-      md5: d82125e4a70eb6a9490e5095fb516a8c
-      size: 336
+      md5: 1b4e10766a2b45a150c43ff9d64ba4dd.dir
+      size: 53362
+      nfiles: 26
     outs:
-    - path: output/model.jbl
+    - path: output/model.pkl
       hash: md5
-      md5: 9e790da96c29cde291945ba5a313983b
+      md5: 1785e51e8d180acdbd94e2a5401be63e
       size: 46215
   analyze:
-    cmd: python src/get_metrics.py
+    cmd: python -m review_rating.modeling evaluate --input-dir output --model-path
+      output/model.pkl > output/metrics.txt
     deps:
-    - path: src/get_metrics.py
+    - path: review_rating/
       hash: md5
-      md5: b02f7bf286b1ddcb70117d43eaece646
-      size: 848
+      md5: 1b4e10766a2b45a150c43ff9d64ba4dd.dir
+      size: 53362
+      nfiles: 26
     outs:
-    - path: output/metrics.json
+    - path: output/metrics.txt
       hash: md5
-      md5: 675e44615899c0a3a68eb6979ca2cad9
-      size: 115
+      md5: f68b027201e09027b18b67461547e979
+      size: 54

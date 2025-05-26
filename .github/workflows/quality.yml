@@ -2,17 +2,19 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [main]
+    branches:
+      - '*'
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2 
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -21,19 +23,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
       #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest --cov=training tests/  
+          pytest --cov=review_rating review_rating
 
       - name: Run pylint
         run: |
-          pylint training
+          pylint review_rating --ignore tests
           
       - name: Generate coverage report
         run: |
