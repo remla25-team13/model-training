@@ -31,4 +31,4 @@ stages:
     deps: 
     - src/get_metrics.py
     outs:
-    - output/metrics.txt
+    - output/metrics.json

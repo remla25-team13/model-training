@@ -5,15 +5,15 @@ stages:
     deps:
     - path: src/get_data.py
       hash: md5
-      md5: f1dc51f2abef6e1bd3bc0e5ae0f49f6e
-      size: 73
+      md5: 064a90d682189a022dcb5a9c31d6e4b2
+      size: 135
   preprocess:
     cmd: python src/preprecessing.py
     deps:
     - path: src/preprecessing.py
       hash: md5
-      md5: 99d3136cec3867317843fb1ce9d76298
-      size: 680
+      md5: 64322075135983834013bca861db6551
+      size: 862
     outs:
     - path: output/corpus.jbl
       hash: md5
@@ -28,8 +28,8 @@ stages:
     deps:
     - path: src/build_vectorizer.py
       hash: md5
-      md5: d60ff95a3df6894962debe9bf2dc1aff
-      size: 787
+      md5: 759c45a57db64e3b705bb43a4212557f
+      size: 1056
     outs:
     - path: output/splits/X_test.jbl
       hash: md5
@@ -49,7 +49,7 @@ stages:
       size: 13781
     - path: output/vectorizer.jbl
       hash: md5
-      md5: 5f51ba1731c005a1a5b429c662dcc1ba
+      md5: 810b36fe23232f815570ee51612fdf11
       size: 53584
   train_model:
     cmd: python src/train_model.py
@@ -68,8 +68,8 @@ stages:
     deps:
     - path: src/train_model.py
       hash: md5
-      md5: 72a1aeb2bd8bef4e881d68d3dc35150d
-      size: 305
+      md5: d82125e4a70eb6a9490e5095fb516a8c
+      size: 336
     outs:
     - path: output/model.jbl
       hash: md5
@@ -80,10 +80,10 @@ stages:
     deps:
     - path: src/get_metrics.py
       hash: md5
-      md5: 9a9755c3deb75d05835351490d0c1a94
-      size: 550
+      md5: b02f7bf286b1ddcb70117d43eaece646
+      size: 848
     outs:
-    - path: output/metrics.txt
+    - path: output/metrics.json
       hash: md5
-      md5: 6ccbbe54635f0472400a14aea5863e53
-      size: 93
+      md5: 675e44615899c0a3a68eb6979ca2cad9
+      size: 115
