@@ -1,6 +1,6 @@
 """Train and evaluate a Naive Bayes sentiment model for restaurant reviews."""
 
-import pickle
+import pickle # nosec B403
 import joblib
 import pandas as pd
 
