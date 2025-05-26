@@ -1,3 +1,14 @@
+"""
+This module provides functionality to prepare and split review data for model training.
+
+It includes:
+- Loading review data from a TSV file.
+- Preprocessing review text using a custom Preprocessor.
+- Vectorizing the preprocessed text using CountVectorizer with a configurable maximum number of features.
+- Splitting the data into training and testing sets.
+- Saving the fitted vectorizer and processed data to disk for later use.
+"""
+
 import pickle
 from pathlib import Path
 
@@ -32,14 +43,11 @@ def prepare_data(
 
     # Load and preprocess data
     dataset = load_data(filepath=input_path)
-    reviews = dataset["Review"]
-    ratings = dataset["Liked"]
 
     # Preprocess text and vectorize
-    corpus = [Preprocessor().preprocess(review) for review in reviews]
     vectorizer = CountVectorizer(max_features=max_features)
-    X = vectorizer.fit_transform(corpus).toarray()
-    y = ratings.values
+    x = vectorizer.fit_transform([Preprocessor().preprocess(review) for review in dataset["Review"]]).toarray()
+    y = dataset["Liked"].values
 
     # Save vectorizer
     vectorizer_path = f"{output_dir}/vectorizer.pkl"
@@ -49,16 +57,15 @@ def prepare_data(
 
     # Split data
     if test_split == 0.0:
-        X_train, X_test, y_train, y_test = X, [], y, []
+        x_train, x_test, y_train, y_test = x, [], y, []
     else:
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=test_split, random_state=random_state
+        x_train, x_test, y_train, y_test = train_test_split(
+            x, y, test_size=test_split, random_state=random_state
         )
 
     # Save processed data
-    data_path = f"{output_dir}/processed_data.pk1"
-    joblib.dump((X_train, X_test, y_train, y_test), data_path)
+    joblib.dump((x_train, x_test, y_train, y_test), f"{output_dir}/processed_data.pk1")
     logger.info(
-        f"Split the data into {len(X_train)} training and {len(X_test)} testing samples."
+        f"Split the data into {len(x_train)} training and {len(x_test)} testing samples."
     )
-    logger.info(f"Saved processed data to {data_path}")
+    logger.info(f"Saved processed data to {f"{output_dir}/processed_data.pk1"}")

@@ -1,3 +1,4 @@
+"""Main entry point for evaluating a sentiment analysis model on restaurant reviews."""
 import joblib
 from loguru import logger
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -17,15 +18,15 @@ def evaluate_model(
     """
     # Load data and model
     data_path = f"{input_dir}/processed_data.pk1"
-    _, X_test, _, y_test = joblib.load(data_path)
+    _, x_test, _, y_test = joblib.load(data_path)
 
     classifier = joblib.load(model_path)
-    if len(X_test) == 0 or len(y_test) == 0:
+    if len(x_test) == 0 or len(y_test) == 0:
         logger.warning("No test data available. Skipping evaluation.")
         return
 
     # Evaluate model
-    y_pred = classifier.predict(X_test)
+    y_pred = classifier.predict(x_test)
 
     # Calculate metrics
     cm = confusion_matrix(y_test, y_pred)

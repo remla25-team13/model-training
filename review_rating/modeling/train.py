@@ -1,3 +1,4 @@
+"""Main entry point for training a sentiment analysis model on restaurant reviews."""
 from pathlib import Path
 
 import joblib
@@ -22,12 +23,12 @@ def train_model(
     """
     # Load processed data
     data_path = f"{input_dir}/processed_data.pk1"
-    X_train, _, y_train, _ = joblib.load(data_path)
-    logger.info(f"Loaded training data with {len(X_train)} samples from {data_path}")
+    x_train, _, y_train, _ = joblib.load(data_path)
+    logger.info(f"Loaded training data with {len(x_train)} samples from {data_path}")
 
     # Train model
     classifier = GaussianNB()
-    classifier.fit(X_train, y_train)
+    classifier.fit(x_train, y_train)
     logger.info("Model training completed")
 
     # Save model

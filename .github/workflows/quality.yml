@@ -34,7 +34,7 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint training 
+          pylint review_rating --ignore tests
           
       - name: Generate coverage report
         run: |
