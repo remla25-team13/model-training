@@ -4,9 +4,9 @@ stages:
     deps:
     - src/get_data.py
   preprocess:
-    cmd: python src/preprecessing.py
+    cmd: python src/preprocessing.py
     deps:
-    - src/preprecessing.py
+    - src/preprocessing.py
     outs:
     - output/corpus.jbl
     - output/labels.jbl
