@@ -1,19 +1,19 @@
 stages:
   get_data:
-    cmd: python src/get_data.py
+    cmd: python training/get_data.py
     deps:
-    - src/get_data.py
+    - training/get_data.py
   preprocess:
-    cmd: python src/preprocessing.py
+    cmd: python training/preprocessing.py
     deps:
-    - src/preprocessing.py
+    - training/preprocessing.py
     outs:
     - output/corpus.jbl
     - output/labels.jbl
   vectorize:
-    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python src/build_vectorizer.py
+    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python training/build_vectorizer.py
     deps:
-    - src/build_vectorizer.py
+    - training/build_vectorizer.py
     outs:
     - output/vectorizer.jbl
     - output/splits/X_train.jbl
@@ -21,14 +21,14 @@ stages:
     - output/splits/y_train.jbl
     - output/splits/y_test.jbl
   train:
-    cmd: python src/train_model.py
+    cmd: python training/train_model.py
     deps:
-    - src/train_model.py
+    - training/train_model.py
     outs:
     - output/model.jbl
   analyze:
-    cmd: python src/get_metrics.py
+    cmd: python training/get_metrics.py
     deps: 
-    - src/get_metrics.py
+    - training/get_metrics.py
     outs:
     - output/metrics.json
