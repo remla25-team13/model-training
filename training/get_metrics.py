@@ -10,7 +10,7 @@ def get_metrics():
     cls=joblib.load('output/model.jbl')
     x = joblib.load('output/splits/X_test.jbl')
     y = joblib.load('output/splits/y_test.jbl')
-    
+
     y_pred = cls.predict(x)
 
     today = datetime.today().isoformat()
