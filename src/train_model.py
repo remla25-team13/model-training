@@ -4,10 +4,15 @@ import joblib
 
 from sklearn.naive_bayes import GaussianNB
 
-X = joblib.load('output/splits/X_train.jbl')
-y = joblib.load('output/splits/y_train.jbl')
+def train(x, y):
+    """Run training step"""
+    classifier = GaussianNB()
+    classifier.fit(x, y)
 
-classifier = GaussianNB()
-classifier.fit(X, y)
+    joblib.dump(classifier, 'output/model.jbl')
 
-joblib.dump(classifier, 'output/model.jbl')
+if __name__ == "__main__":
+    X_train = joblib.load('output/splits/X_train.jbl')
+    y_train = joblib.load('output/splits/y_train.jbl')
+
+    train(X_train, y_train)

@@ -6,20 +6,27 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 
-TEST_SIZE = float(os.getenv('TEST_SIZE'))
-RNG_STATE = int(os.getenv('RNG_STATE'))
-MAX_FEATURES = int(os.getenv('VECTORIZER_MAX_FEATURES'))
-y = joblib.load('output/labels.jbl')
+def build_vectorizer(test_size, rng_state, max_features, labels, corpus):
+    """Run vectorization step"""
+    cv = CountVectorizer(max_features=max_features)
 
-corpus = joblib.load('output/corpus.jbl')
-cv = CountVectorizer(max_features=MAX_FEATURES)
+    x_vectorized = cv.fit_transform(corpus).toarray()
+    x_train, x_test, y_train, y_test = train_test_split(x_vectorized, labels,
+        test_size=test_size, random_state=rng_state)
 
-X = cv.fit_transform(corpus).toarray()
-X_train, X_test, y_train, y_test = train_test_split(X, y,
-    test_size=TEST_SIZE, random_state=RNG_STATE)
+    joblib.dump(cv, 'output/vectorizer.jbl')
+    joblib.dump(x_train, 'output/splits/X_train.jbl')
+    joblib.dump(x_test, 'output/splits/X_test.jbl')
+    joblib.dump(y_train, 'output/splits/y_train.jbl')
+    joblib.dump(y_test, 'output/splits/y_test.jbl')
 
-joblib.dump(cv, 'output/vectorizer.jbl')
-joblib.dump(X_train, 'output/splits/X_train.jbl')
-joblib.dump(X_test, 'output/splits/X_test.jbl')
-joblib.dump(y_train, 'output/splits/y_train.jbl')
-joblib.dump(y_test, 'output/splits/y_test.jbl')
+
+if __name__ == '__main__':
+    TEST_SIZE = float(os.getenv('TEST_SIZE', '0.2'))
+    RNG_STATE = int(os.getenv('RNG_STATE', '42'))
+    MAX_FEATURES = int(os.getenv('VECTORIZER_MAX_FEATURES', '1420'))
+    y = joblib.load('output/labels.jbl')
+
+    CORPUS = joblib.load('output/corpus.jbl')
+
+    build_vectorizer(TEST_SIZE, RNG_STATE, MAX_FEATURES, y, CORPUS)

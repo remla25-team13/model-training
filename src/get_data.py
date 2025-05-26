@@ -2,4 +2,9 @@
 
 import nltk
 
-nltk.download('stopwords')
+def get_data():
+    """Run data download step"""
+    nltk.download('stopwords')
+
+if __name__ == '__main__':
+    get_data()
