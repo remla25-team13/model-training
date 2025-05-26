@@ -3,3 +3,6 @@ loguru
 pandas
 scikit-learn
 joblib
+tqdm
+bandit
+dvc

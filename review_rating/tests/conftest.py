@@ -7,8 +7,8 @@ from lib_ml import Preprocessor
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 
-from review_rating.modeling.train import train_model
 from review_rating.modeling.prepare_data import prepare_data
+from review_rating.modeling.train import train_model
 
 
 @pytest.fixture(scope="session", autouse=True)

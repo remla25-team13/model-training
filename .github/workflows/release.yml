@@ -49,20 +49,11 @@ jobs:
 
     - name: Automatically download the dataset
       run:
-        wget -O a1_RestaurantReviews_HistoricDump.tsv https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
-
-    - name: Run data preparation
-      run: |
-        python -m review_rating.modeling prepare a1_RestaurantReviews_HistoricDump.tsv -o . -t 0.1
+        wget -O data/raw/a1_RestaurantReviews_HistoricDump.tsv https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
 
     - name: Run training
       run: |
-        python -m review_rating.modeling train --input-dir . --output-model model.pkl
-
-    - name: Run evaluation
-      run: |
-        python -m review_rating.modeling evaluate --input-dir . --model-path model.pkl
-
+        dvc repro
 
     - name: Upload training artifacts
       uses: actions/upload-artifact@v4

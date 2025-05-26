@@ -21,11 +21,9 @@ docker build -t model-training .
 docker run --rm model-training
 ```
 
-Or run the notebook locally:
-
+Or run the pipeline through DVC:
 ```bash
-pip install -r requirements.txt
-jupyter notebook b1_Sentiment_Analysis_Model.ipynb
+dvc repro
 ```
 
 ## Related Repositories

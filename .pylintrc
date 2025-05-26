@@ -1,2 +1,20 @@
+[MASTER]
+ignore=tests
+jobs=1
+load-plugins=pylint_custom_ml_rules
+
+[MESSAGES CONTROL]
+disable=C0114, C0115, C0116, R0903
+
 [FORMAT]
 max-line-length=120
+
+[TYPECHECK]
+ignored-modules=pandas
+
+[DESIGN]
+max-args=5
+max-attributes=10
+
+[REPORTS]
+output-format=colorized

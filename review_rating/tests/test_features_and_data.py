@@ -1,5 +1,4 @@
 import pandas as pd
-import pytest
 
 
 def test_dataset_not_empty(dataset):
