@@ -5,9 +5,10 @@ import json
 import joblib
 from sklearn.metrics import confusion_matrix, accuracy_score
 
+
 def get_metrics():
     """Run metrics step"""
-    cls=joblib.load('output/model.jbl')
+    cls = joblib.load('output/model.jbl')
     x = joblib.load('output/splits/X_test.jbl')
     y = joblib.load('output/splits/y_test.jbl')
 
@@ -25,6 +26,7 @@ def get_metrics():
         }
 
         json.dump(metrics_obj, f)
+
 
 if __name__ == "__main__":
     get_metrics()

@@ -7,9 +7,10 @@ from tqdm import trange
 
 from lib_ml import Preprocessor
 
+
 def preprocess():
     """Run preprocessing step"""
-    dataset = pd.read_csv('output/reviews.tsv', delimiter = '\t', quoting = 3)
+    dataset = pd.read_csv('output/reviews.tsv', delimiter='\t', quoting=3)
     preprocessor = Preprocessor()
 
     corpus = []

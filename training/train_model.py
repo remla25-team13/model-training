@@ -4,6 +4,7 @@ import joblib
 
 from sklearn.naive_bayes import GaussianNB
 
+
 def train():
     """Run training step"""
     x = joblib.load('output/splits/X_train.jbl')
@@ -13,6 +14,7 @@ def train():
     classifier.fit(x, y)
 
     joblib.dump(classifier, 'output/model.jbl')
+
 
 if __name__ == "__main__":
     train()

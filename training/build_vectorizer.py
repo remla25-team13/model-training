@@ -6,16 +6,17 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 def build_vectorizer(test_size=0.2, rng_state=42, max_features=1420):
     """Run vectorization step"""
-    labels=joblib.load('output/labels.jbl')
-    corpus=joblib.load('output/corpus.jbl')
+    labels = joblib.load('output/labels.jbl')
+    corpus = joblib.load('output/corpus.jbl')
 
     cv = CountVectorizer(max_features=max_features)
 
     x_vectorized = cv.fit_transform(corpus).toarray()
-    x_train, x_test, y_train, y_test = train_test_split(x_vectorized, labels,
-        test_size=test_size, random_state=rng_state)
+    x_train, x_test, y_train, y_test = train_test_split(x_vectorized, labels, test_size=test_size,
+                                                        random_state=rng_state)
 
     joblib.dump(cv, 'output/vectorizer.jbl')
     joblib.dump(x_train, 'output/splits/X_train.jbl')
