@@ -29,11 +29,11 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest --cov=src tests/  
+          pytest --cov=training tests/  
 
       - name: Run pylint
         run: |
-          pylint src 
+          pylint training
           
       - name: Generate coverage report
         run: |
