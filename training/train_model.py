@@ -1,8 +1,8 @@
 """Train model(s)"""
 
 import joblib
-from dvclive import Live
 from sklearn.naive_bayes import GaussianNB, BernoulliNB
+from dvclive import Live
 
 
 def train():

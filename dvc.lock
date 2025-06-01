@@ -49,7 +49,7 @@ stages:
       size: 13781
     - path: output/vectorizer.jbl
       hash: md5
-      md5: 3c1c6568df0b37609bc737d7c6eb0693
+      md5: ff06d0e382c25bdeb2c69a7503f95455
       size: 53584
   train_model:
     cmd: python src/train_model.py
