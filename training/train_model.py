@@ -1,19 +1,29 @@
 """Train model(s)"""
 
 import joblib
-
-from sklearn.naive_bayes import GaussianNB
+from dvclive import Live
+from sklearn.naive_bayes import GaussianNB, BernoulliNB
 
 
 def train():
     """Run training step"""
-    x = joblib.load('output/splits/X_train.jbl')
-    y = joblib.load('output/splits/y_train.jbl')
+    with Live() as live:
+        live.log_param("classifiers", "GaussianNB, BernouliNB")
 
-    classifier = GaussianNB()
-    classifier.fit(x, y)
+        x = joblib.load('output/splits/X_train.jbl')
+        y = joblib.load('output/splits/y_train.jbl')
 
-    joblib.dump(classifier, 'output/model.jbl')
+        gauss_classifier = GaussianNB()
+        bernu_classifier = BernoulliNB()
+
+        gauss_classifier.fit(x, y)
+        bernu_classifier.fit(x, y)
+
+        joblib.dump(gauss_classifier, 'output/model.jbl')
+        joblib.dump(bernu_classifier, 'output/model-bernu.jbl')
+
+        live.log_artifact("output/model.jbl", type="model")
+        live.log_artifact("output/model-bernu.jbl", type="model")
 
 
 if __name__ == "__main__":
