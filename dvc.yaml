@@ -26,9 +26,21 @@ stages:
     - training/train_model.py
     outs:
     - output/model.jbl
+    - output/model-bernu.jbl
   analyze:
     cmd: python training/get_metrics.py
-    deps: 
+    deps:
     - training/get_metrics.py
     outs:
     - output/metrics.json
+metrics:
+- output/metrics.json
+params:
+- dvclive/params.yaml
+artifacts:
+  model:
+    path: output/model.jbl
+    type: model
+  model-bernu:
+    path: output/model-bernu.jbl
+    type: model
