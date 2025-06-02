@@ -1,0 +1,13 @@
+/corpus.jbl
+/labels.jbl
+/vectorizer.jbl
+/vectorized_x.jbl
+/model.jbl
+/metrics.txt
+/metrics.json
+/model-bernu.jbl
+/reviews.tsv
+/model-gauss.jbl
+/model-multi.jbl
+/processed_data.pk1
+/vectorizer.pkl

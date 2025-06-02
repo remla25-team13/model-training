@@ -10,6 +10,11 @@ from sklearn.model_selection import train_test_split
 from review_rating.modeling.prepare_data import prepare_data
 from review_rating.modeling.train import train_model
 
+MODEL_PATH_A = "processed/model-gauss.jbl"
+MODEL_PATH_B = "processed/model-multi.jbl"
+VECTORIZER_PATH = "processed/vectorizer.pkl"
+DATASET_PATH = "output/reviews.tsv"
+
 
 @pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
@@ -27,8 +32,12 @@ def build_artifacts():
 
     train_model(
         input_dir="processed",
-        output_model="processed/sentiment_model.pkl",
+        output_path="processed/",
     )
+
+    assert os.path.exists(MODEL_PATH_A), "Model A file not created"
+    assert os.path.exists(MODEL_PATH_B), "Model B file not created"
+    assert os.path.exists(VECTORIZER_PATH), "Vectorizer file not created"
 
 
 @pytest.fixture(scope="session")
@@ -70,5 +79,6 @@ def split_data(X_y):
 
 @pytest.fixture(scope="session")
 def classifier(split_data):
-    clf = joblib.load("processed/sentiment_model.pkl")
+    clf = joblib.load(MODEL_PATH_A)
+    clf = joblib.load(MODEL_PATH_B)
     return clf

@@ -6,3 +6,4 @@ joblib
 tqdm
 bandit
 dvc
+dvclive

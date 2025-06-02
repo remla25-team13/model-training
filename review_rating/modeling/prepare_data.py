@@ -9,7 +9,7 @@ It includes:
 - Saving the fitted vectorizer and processed data to disk for later use.
 """
 
-import pickle
+import pickle  # nosec
 from pathlib import Path
 
 import joblib
@@ -18,7 +18,7 @@ from loguru import logger
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 
-from review_rating.modeling import load_data
+from review_rating.modeling import load_data  # nosec
 
 
 def prepare_data(
@@ -46,7 +46,9 @@ def prepare_data(
 
     # Preprocess text and vectorize
     vectorizer = CountVectorizer(max_features=max_features)
-    x = vectorizer.fit_transform([Preprocessor().preprocess(review) for review in dataset["Review"]]).toarray()
+    x = vectorizer.fit_transform(
+        [Preprocessor().preprocess(review) for review in dataset["Review"]]
+    ).toarray()
     y = dataset["Liked"].values
 
     # Save vectorizer

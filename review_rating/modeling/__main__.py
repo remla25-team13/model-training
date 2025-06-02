@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 
+from dvclive import Live
 from review_rating.modeling.evaluate import evaluate_model
 from review_rating.modeling.prepare_data import prepare_data
 from review_rating.modeling.train import train_model
@@ -95,11 +96,11 @@ eval_parser.add_argument(
     help="Path to the trained model.",
 )
 eval_parser.add_argument(
-    "--output-dir",
+    "--metrics-path",
     "-o",
     type=str,
     default="results",
-    help="Directory to save evaluation results.",
+    help="File to save evaluation results.",
 )
 
 args = parser.parse_args()
@@ -120,14 +121,17 @@ elif args.command == "train":
     if model_dir:
         model_dir.mkdir(parents=True, exist_ok=True)
 
-    train_model(
-        input_dir=args.input_dir,
-        output_model=args.output_model,
-    )
+    with Live() as live_logger:
+        train_model(
+            input_dir=args.input_dir,
+            output_path=args.output_model,
+            live_logger=live_logger,
+        )
     print(f"Model trained and saved to {args.output_model}")
 
 elif args.command == "evaluate":
     evaluate_model(
         input_dir=args.input_dir,
         model_path=args.model_path,
+        metrics_path=args.metrics_path,
     )
