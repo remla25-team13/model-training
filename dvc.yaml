@@ -25,8 +25,8 @@ stages:
     deps:
     - training/train_model.py
     outs:
-    - output/model.jbl
-    - output/model-bernu.jbl
+    - output/model-gauss.jbl
+    - output/model-multi.jbl
   analyze:
     cmd: python training/get_metrics.py
     deps:
@@ -39,8 +39,8 @@ params:
 - dvclive/params.yaml
 artifacts:
   model:
-    path: output/model.jbl
+    path: output/model-gauss.jbl
     type: model
-  model-bernu:
-    path: output/model-bernu.jbl
+  model-multi:
+    path: output/model-multi.jbl
     type: model

@@ -68,26 +68,26 @@ stages:
     deps:
     - path: training/train_model.py
       hash: md5
-      md5: e44694a0b32e1641df183eecb13f6dac
-      size: 800
+      md5: 15f88ef0196f7bba599f027f89de06da
+      size: 810
     outs:
-    - path: output/model-bernu.jbl
-      hash: md5
-      md5: f10472a0d4f34b729ff1fcfcb9bc4cc6
-      size: 46247
-    - path: output/model.jbl
+    - path: output/model-gauss.jbl
       hash: md5
       md5: 9e790da96c29cde291945ba5a313983b
       size: 46215
+    - path: output/model-multi.jbl
+      hash: md5
+      md5: 22c8a45a4291e2f5c31b20ef875a12c0
+      size: 46231
   analyze:
     cmd: python training/get_metrics.py
     deps:
     - path: training/get_metrics.py
       hash: md5
-      md5: 288a5ce9fc6213e458b45ed951f2d807
-      size: 781
+      md5: f70bc5fd00607a1bf6dbf7570ff5754b
+      size: 935
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: 84e0bf5bef983ea4a057abb70cf4ed5c
-      size: 115
+      md5: c6787d2f25576bd22611eb76e72a44d1
+      size: 252
