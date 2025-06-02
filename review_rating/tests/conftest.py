@@ -22,8 +22,8 @@ def build_artifacts():
         max_features=1420,
     )
 
-    assert os.path.exists(f"processed/processed_data.pk1"), "Data file not created"
-    assert os.path.exists(f"processed/vectorizer.pkl"), "Vectorizer file not created"
+    assert os.path.exists("processed/processed_data.pk1"), "Data file not created"
+    assert os.path.exists("processed/vectorizer.pkl"), "Vectorizer file not created"
 
     train_model(
         input_dir="processed",

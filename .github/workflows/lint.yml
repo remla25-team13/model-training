@@ -19,12 +19,12 @@ jobs:
 
     - name: Run pylint
       run: |
-        PYTHONPATH=. pylint training --rcfile=.pylintrc
+        PYTHONPATH=. pylint review_rating --rcfile=.pylintrc
 
     - name: Run flake8
       run: |
-        flake8 training
+        flake8 review_rating
 
     - name: Run bandit
       run: |
-        bandit -r training -c bandit.yaml
+        bandit -r review_rating -c bandit.yaml

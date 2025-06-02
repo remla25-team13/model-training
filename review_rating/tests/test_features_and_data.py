@@ -1,6 +1,3 @@
-import pandas as pd
-
-
 def test_dataset_not_empty(dataset):
     assert not dataset.empty
 
