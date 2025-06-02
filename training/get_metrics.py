@@ -17,15 +17,15 @@ def get_metrics():
         "multi": {}
     }
 
-    for type in models:
-        cls = joblib.load(f'output/model-{type}.jbl')
+    for model_type in models:
+        cls = joblib.load(f'output/model-{model_type}.jbl')
         y_pred = cls.predict(x)
 
         today = datetime.today().isoformat()
         cm = confusion_matrix(y, y_pred)
         accuracy = accuracy_score(y, y_pred)
 
-        metrics_obj[type] = {
+        metrics_obj[model_type] = {
             "date": f"{today}",
             "confusion_matrix": f"{cm}",
             "accuracy": f"{accuracy}"

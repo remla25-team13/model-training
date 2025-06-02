@@ -5,10 +5,10 @@ from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from dvclive import Live
 
 
-def train(live=None):
+def train(live_logger=None):
     """Run training step"""
-    if live:
-        live.log_param("classifiers", "GaussianNB, BernouliNB")
+    if live_logger:
+        live_logger.log_param("classifiers", "GaussianNB, BernouliNB")
 
     x = joblib.load('output/splits/X_train.jbl')
     y = joblib.load('output/splits/y_train.jbl')
@@ -21,9 +21,9 @@ def train(live=None):
     joblib.dump(gauss_classifier, 'output/model-gauss.jbl')
     joblib.dump(multi_classifier, 'output/model-multi.jbl')
 
-    if live:
-        live.log_artifact("output/model-gauss.jbl", type="model")
-        live.log_artifact("output/model-multi.jbl", type="model")
+    if live_logger:
+        live_logger.log_artifact("output/model-gauss.jbl", type="model")
+        live_logger.log_artifact("output/model-multi.jbl", type="model")
 
 
 if __name__ == "__main__":
