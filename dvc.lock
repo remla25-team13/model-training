@@ -1,19 +1,19 @@
 schema: '2.0'
 stages:
   get_data:
-    cmd: python src/get_data.py
+    cmd: python training/get_data.py
     deps:
-    - path: src/get_data.py
+    - path: training/get_data.py
       hash: md5
-      md5: 064a90d682189a022dcb5a9c31d6e4b2
-      size: 135
+      md5: f51092c1b091e1c6681046ac34b573ae
+      size: 170
   preprocess:
-    cmd: python src/preprecessing.py
+    cmd: python training/preprocessing.py
     deps:
-    - path: src/preprecessing.py
+    - path: training/preprocessing.py
       hash: md5
-      md5: 64322075135983834013bca861db6551
-      size: 862
+      md5: f6c03d361aad04c8523668dc844535af
+      size: 631
     outs:
     - path: output/corpus.jbl
       hash: md5
@@ -24,12 +24,12 @@ stages:
       md5: ac35b1db244501fc47c46a01943edece
       size: 17201
   vectorize:
-    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python src/build_vectorizer.py
+    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python training/build_vectorizer.py
     deps:
-    - path: src/build_vectorizer.py
+    - path: training/build_vectorizer.py
       hash: md5
-      md5: 759c45a57db64e3b705bb43a4212557f
-      size: 1056
+      md5: a52a8c93edadec9bd1c2a6be60393b52
+      size: 1163
     outs:
     - path: output/splits/X_test.jbl
       hash: md5
@@ -49,7 +49,7 @@ stages:
       size: 13781
     - path: output/vectorizer.jbl
       hash: md5
-      md5: 810b36fe23232f815570ee51612fdf11
+      md5: ff06d0e382c25bdeb2c69a7503f95455
       size: 53584
   train_model:
     cmd: python src/train_model.py
@@ -64,26 +64,30 @@ stages:
       md5: 9e790da96c29cde291945ba5a313983b
       size: 46215
   train:
-    cmd: python src/train_model.py
+    cmd: python training/train_model.py
     deps:
-    - path: src/train_model.py
+    - path: training/train_model.py
       hash: md5
-      md5: d82125e4a70eb6a9490e5095fb516a8c
-      size: 336
+      md5: 057cee3a0d2f6dad26d84cb84747dda1
+      size: 826
     outs:
-    - path: output/model.jbl
+    - path: output/model-gauss.jbl
       hash: md5
       md5: 9e790da96c29cde291945ba5a313983b
       size: 46215
-  analyze:
-    cmd: python src/get_metrics.py
-    deps:
-    - path: src/get_metrics.py
+    - path: output/model-multi.jbl
       hash: md5
-      md5: b02f7bf286b1ddcb70117d43eaece646
-      size: 848
+      md5: 22c8a45a4291e2f5c31b20ef875a12c0
+      size: 46231
+  analyze:
+    cmd: python training/get_metrics.py
+    deps:
+    - path: training/get_metrics.py
+      hash: md5
+      md5: f70bc5fd00607a1bf6dbf7570ff5754b
+      size: 935
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: 675e44615899c0a3a68eb6979ca2cad9
-      size: 115
+      md5: c6787d2f25576bd22611eb76e72a44d1
+      size: 252

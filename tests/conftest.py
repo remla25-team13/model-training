@@ -11,8 +11,8 @@ from training.build_vectorizer import build_vectorizer
 from training.train_model import train
 from training.get_metrics import get_metrics
 
-
-MODEL_PATH = "output/model.jbl"
+MODEL_PATH_A = "output/model-gauss.jbl"
+MODEL_PATH_B = "output/model-multi.jbl"
 VECTORIZER_PATH = "output/vectorizer.jbl"
 DATASET_PATH = "output/reviews.tsv"
 
@@ -26,7 +26,8 @@ def build_artifacts():
     train()
     get_metrics()
 
-    assert os.path.exists(MODEL_PATH), "Model file not created"
+    assert os.path.exists(MODEL_PATH_A), "Model A file not created"
+    assert os.path.exists(MODEL_PATH_B), "Model B file not created"
     assert os.path.exists(VECTORIZER_PATH), "Vectorizer file not created"
 
 @pytest.fixture(scope="session")
@@ -60,5 +61,6 @@ def split_data(X_y):
 
 @pytest.fixture(scope="session")
 def classifier(split_data):
-    clf = joblib.load(MODEL_PATH)
+    clf = joblib.load(MODEL_PATH_A)
+    clf = joblib.load(MODEL_PATH_B)
     return clf

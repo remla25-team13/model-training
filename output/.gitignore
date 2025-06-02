@@ -4,5 +4,8 @@
 /vectorized_x.jbl
 /model.jbl
 /metrics.txt
-/reviews.tsv
 /metrics.json
+/model-bernu.jbl
+/reviews.tsv
+/model-gauss.jbl
+/model-multi.jbl

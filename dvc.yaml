@@ -25,10 +25,25 @@ stages:
     deps:
     - training/train_model.py
     outs:
-    - output/model.jbl
+    - output/model-gauss.jbl
+    - output/model-multi.jbl
   analyze:
     cmd: python training/get_metrics.py
-    deps: 
+    deps:
     - training/get_metrics.py
     outs:
     - output/metrics.json
+metrics:
+- output/metrics.json
+params:
+- dvclive/params.yaml
+artifacts:
+  model:
+    path: output/model.jbl
+    type: model
+  model-multi:
+    path: output/model-multi.jbl
+    type: model
+  model-gauss:
+    path: output/model-gauss.jbl
+    type: model

@@ -12,3 +12,4 @@ pylint
 flake8
 bandit
 dvc
+dvclive
