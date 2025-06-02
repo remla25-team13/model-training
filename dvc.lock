@@ -68,8 +68,8 @@ stages:
     deps:
     - path: training/train_model.py
       hash: md5
-      md5: 15f88ef0196f7bba599f027f89de06da
-      size: 810
+      md5: 057cee3a0d2f6dad26d84cb84747dda1
+      size: 826
     outs:
     - path: output/model-gauss.jbl
       hash: md5

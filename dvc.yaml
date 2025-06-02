@@ -39,8 +39,11 @@ params:
 - dvclive/params.yaml
 artifacts:
   model:
-    path: output/model-gauss.jbl
+    path: output/model.jbl
     type: model
   model-multi:
     path: output/model-multi.jbl
+    type: model
+  model-gauss:
+    path: output/model-gauss.jbl
     type: model
