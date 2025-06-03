@@ -2,7 +2,7 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [main]
+    branches: [ "**" ]  # All branches
   pull_request:
     branches: [main]
 
@@ -34,7 +34,18 @@ jobs:
       - name: Run pylint
         run: |
           pylint training
+
+      - name: Save pylint score
+        run: |
+          pylint training > pylint-report.txt || true
+          grep "Your code has been rated at" pylint-report.txt > pylint-score.md || echo "Pylint score not found" > pylint-score.md
           
+      - name: Upload pylint score
+        uses: actions/upload-artifact@v4
+        with:
+          name: pylint-score
+          path: pylint-score.md
+
       - name: Generate coverage report
         run: |
           coverage xml
@@ -45,6 +56,43 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml
+      
+      - name: Run pylint and update badge with gradient color
+        run: |
+          pip install pylint bc
+          pylint training --score=y > pylint_output.txt || true
+          SCORE=$(grep "Your code has been rated at" pylint_output.txt | awk '{print $7}' | cut -d'/' -f1)
+          SCORE_CLEAN=$(printf "%.2f" "$SCORE")
+
+          # Set badge color gradient
+          if (( $(echo "$SCORE >= 9.5" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$SCORE >= 8.5" | bc -l) )); then
+            COLOR="green"
+          elif (( $(echo "$SCORE >= 7.5" | bc -l) )); then
+            COLOR="yellowgreen"
+          elif (( $(echo "$SCORE >= 6.5" | bc -l) )); then
+            COLOR="yellow"
+          elif (( $(echo "$SCORE >= 5.0" | bc -l) )); then
+            COLOR="orange"
+          else
+            COLOR="red"
+          fi
+
+          # Construct badge markdown
+          BADGE="![pylint](https://img.shields.io/badge/PyLint-${SCORE_CLEAN}-${COLOR}?logo=python&logoColor=white)"
+
+          # Replace old badge line in README
+          sed -i "s|!\[pylint\](.*)|${BADGE}|" README.md || echo "No badge found to replace"
+
+      - name: Commit updated README badge
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add README.md
+          git commit -m "Update pylint badge score to ${SCORE_CLEAN}" || echo "No changes"
+          git push || echo "Skipping push on PR"
+
 
       - name: Run flake8
         run: |

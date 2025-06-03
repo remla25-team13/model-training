@@ -6,7 +6,7 @@
 ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
 ![Bandit](https://img.shields.io/badge/security-bandit-yellow)
 
-![Pylint](https://img.shields.io/badge/pylint-9.5-green)
+![pylint](https://img.shields.io/badge/PyLint-NA-lightgrey?logo=python&logoColor=white)
 
 
 
