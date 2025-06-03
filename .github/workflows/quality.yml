@@ -45,3 +45,13 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml
+
+      - name: Run flake8
+        run: |
+          pip install flake8
+          flake8 training
+
+      - name: Run Bandit
+        run: |
+          pip install bandit
+          bandit -r training

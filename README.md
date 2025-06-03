@@ -1,6 +1,13 @@
 # model-training
 
-![Build](https://github.com/remla25-team13/model_training/actions/workflows/ci.yml/badge.svg)
+![Build](https://github.com/remla25-team13/model-training/actions/workflows/quality.yml/badge.svg)
+
+<!--still need to be done dynamically!-->
+![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
+![Bandit](https://img.shields.io/badge/security-bandit-yellow)
+
+![Pylint](https://img.shields.io/badge/pylint-9.5-green)
+
 
 
 This repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.
