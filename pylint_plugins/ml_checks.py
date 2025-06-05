@@ -1,9 +1,8 @@
 from pylint.checkers import BaseChecker
-from pylint.interfaces import IAstroidChecker
 
 
 class MLCodeSmellChecker(BaseChecker):
-    __implements__ = IAstroidChecker
+    pass  
 
     name = "ml-code-smells"
     priority = -1
@@ -36,4 +35,6 @@ class MLCodeSmellChecker(BaseChecker):
 
 
 def register(linter):
+    print("Running custom checks...")
     linter.register_checker(MLCodeSmellChecker(linter))
+    print("Custom checks registered.")

@@ -31,9 +31,11 @@ jobs:
         run: |
           pytest --cov=training tests/  
 
-      - name: Run pylint
+      - name: Run pylint (with plugin)
+        env:
+          PYTHONPATH: .
         run: |
-          pylint training
+          pylint training --rcfile=.pylintrc
 
       - name: Save pylint score
         run: |
