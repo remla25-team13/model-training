@@ -60,12 +60,14 @@ jobs:
           path: coverage.xml
       
       - name: Run pylint and update badge with gradient color
+        env:
+          PYTHONPATH: .
         run: |
           pip install pylint bc
-          pylint training --score=y > pylint_output.txt || true
+          pylint training --rcfile=.pylintrc --score=y > pylint_output.txt || true
           SCORE=$(grep "Your code has been rated at" pylint_output.txt | awk '{print $7}' | cut -d'/' -f1)
           SCORE_CLEAN=$(printf "%.2f" "$SCORE")
-
+      
           # Set badge color gradient
           if (( $(echo "$SCORE >= 9.5" | bc -l) )); then
             COLOR="brightgreen"
@@ -80,13 +82,13 @@ jobs:
           else
             COLOR="red"
           fi
-
+      
           # Construct badge markdown
           BADGE="![pylint](https://img.shields.io/badge/PyLint-${SCORE_CLEAN}-${COLOR}?logo=python&logoColor=white)"
-
+      
           # Replace old badge line in README
           sed -i "s|!\[pylint\](.*)|${BADGE}|" README.md || echo "No badge found to replace"
-
+      
       - name: Commit updated README badge
         run: |
           git config user.name "github-actions"
