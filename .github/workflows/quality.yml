@@ -64,7 +64,9 @@ jobs:
           PYTHONPATH: .
         run: |
           pip install pylint bc
+          pip install -e .  # 👈 this makes sure pylint_plugins is importable
           pylint training --rcfile=.pylintrc --score=y > pylint_output.txt || true
+      
           SCORE=$(grep "Your code has been rated at" pylint_output.txt | awk '{print $7}' | cut -d'/' -f1)
           SCORE_CLEAN=$(printf "%.2f" "$SCORE")
       
