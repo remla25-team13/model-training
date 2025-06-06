@@ -9,7 +9,6 @@ It includes:
 - Saving the fitted vectorizer and processed data to disk for later use.
 """
 
-import pickle  # nosec
 from pathlib import Path
 
 import joblib
@@ -53,8 +52,7 @@ def prepare_data(
 
     # Save vectorizer
     vectorizer_path = f"{output_dir}/vectorizer.pkl"
-    with open(vectorizer_path, "wb") as f:
-        pickle.dump(vectorizer, f)
+    joblib.dump(vectorizer, vectorizer_path)
     logger.info(f"Saved vectorizer to {vectorizer_path}")
 
     # Split data

@@ -1,5 +1,4 @@
 import os
-import pickle  # nosec
 
 import joblib
 
@@ -18,13 +17,13 @@ def test_model_serialized():
 
 def test_vectorizer_serialized():
     assert os.path.exists("processed/vectorizer.pkl")
-    vec = pickle.load(open("processed/vectorizer.pkl", "rb"))  # nosec
+    vec = joblib.load("processed/vectorizer.pkl")
     assert hasattr(vec, "transform")
 
 
 def test_prediction_pipeline(preprocessor):
     text = "This place was not great"
-    vec = pickle.load(open("processed/vectorizer.pkl", "rb"))  # nosec
+    vec = joblib.load("processed/vectorizer.pkl")
 
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         model = joblib.load(model_path)
