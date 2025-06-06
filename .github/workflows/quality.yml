@@ -59,6 +59,8 @@ jobs:
           name: coverage-report
           path: coverage.xml
       
+
+          # TODO --> do we need to run lint on 'tests'???
       - name: Run pylint and update badge with gradient color
         env:
           PYTHONPATH: .
@@ -95,7 +97,36 @@ jobs:
           git commit -m "Update pylint badge score to ${SCORE_CLEAN}" || echo "No changes"
           git push || echo "Skipping push on PR"
 
+      - name: Update test coverage badge
+        run: |
+          COVERAGE=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')
+          COVERAGE_CLEAN=$(printf "%.0f" "$COVERAGE")
+      
+          # Set badge color gradient
+          if (( $(echo "$COVERAGE_CLEAN >= 90" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$COVERAGE_CLEAN >= 75" | bc -l) )); then
+            COLOR="green"
+          elif (( $(echo "$COVERAGE_CLEAN >= 50" | bc -l) )); then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+      
+          # Create badge
+          BADGE="![coverage](https://img.shields.io/badge/Coverage-${COVERAGE_CLEAN}%25-${COLOR}?logo=pytest&logoColor=white)"
+      
+          # Replace in README
+          sed -i "s|!\[coverage\](.*)|${BADGE}|" README.md || echo "No coverage badge found to replace"
 
+      - name: Commit coverage badge
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add README.md
+          git commit -m "Update coverage badge" || echo "No changes"
+          git push || echo "Skipping push on PR"
+          
       - name: Run flake8
         run: |
           pip install flake8

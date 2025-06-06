@@ -1,6 +1,7 @@
 # model-training
 
 ![Build](https://github.com/remla25-team13/model-training/actions/workflows/quality.yml/badge.svg)
+![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)
 
 <!--still need to be done dynamically!-->
 ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
@@ -32,6 +33,23 @@ Or run the pipeline through DVC:
 ```bash
 dvc repro
 ```
+
+## 🔒 Linters Used
+
+| Tool     | Purpose                            | Configuration        |
+|----------|------------------------------------|-----------------------|
+| `pylint` | Logic issues, structure, ML rules  | `.pylintrc`, plugin   |
+| `flake8` | PEP-8 compliance                   | `.flake8`             |
+| `bandit` | Security vulnerability scanning    | `bandit.yaml`         |
+
+## 🔍 Custom Pylint Rules
+
+This project includes custom Pylint rules defined in `pylint_plugins/ml_checks.py` to catch common ML code issues:
+
+- `fit-missing-y`: Warns when `.fit(X)` is called with only one argument — possible missing labels.
+- `predict-on-training-data`: Warns when `.predict(X_train)` is used — this may indicate you're evaluating on training data instead of a test split.
+
+These rules are automatically enforced in CI.
 
 ## Related Repositories
 - [lib-ml](https://github.com/remla25-team13/lib-ml)
