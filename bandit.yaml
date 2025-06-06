@@ -1,3 +1,6 @@
+exclude_dirs:
+  - tests
+  - venv
 skips:
-  - B101
-  - B311
+  - B101  # assert_used
+  - B110  # try_except_pass
