@@ -64,13 +64,13 @@ jobs:
           PYTHONPATH: .
         run: |
           pip install pylint bc
-          pylint training --rcfile=.pylintrc --score=y > pylint_output.txt || true
+          pylint training tests --rcfile=.pylintrc --score=y > pylint_output.txt || true
           SCORE=$(grep "Your code has been rated at" pylint_output.txt | awk '{print $7}' | cut -d'/' -f1)
           SCORE_CLEAN=$(printf "%.2f" "$SCORE")
       
           # Set badge color gradient
           if (( $(echo "$SCORE >= 9.5" | bc -l) )); then
-            COLOR="blue"
+            COLOR="brightgreen"
           elif (( $(echo "$SCORE >= 8.5" | bc -l) )); then
             COLOR="green"
           elif (( $(echo "$SCORE >= 7.5" | bc -l) )); then
