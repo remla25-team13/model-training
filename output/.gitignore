@@ -9,3 +9,5 @@
 /reviews.tsv
 /model-gauss.jbl
 /model-multi.jbl
+/processed_data.pk1
+/vectorizer.pkl

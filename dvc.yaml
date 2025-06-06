@@ -1,49 +1,41 @@
 stages:
   get_data:
-    cmd: python training/get_data.py
-    deps:
-    - training/get_data.py
+    cmd: wget -O a1_RestaurantReviews_HistoricDump.tsv 
+      https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
+    outs:
+    - a1_RestaurantReviews_HistoricDump.tsv
   preprocess:
-    cmd: python training/preprocessing.py
+    cmd: python -m review_rating.modeling prepare a1_RestaurantReviews_HistoricDump.tsv
+      -o output -t 0.1
     deps:
-    - training/preprocessing.py
+    - review_rating/
     outs:
-    - output/corpus.jbl
-    - output/labels.jbl
-  vectorize:
-    cmd: VECTORIZER_MAX_FEATURES=1420 TEST_SIZE=0.20 RNG_STATE=42 python training/build_vectorizer.py
-    deps:
-    - training/build_vectorizer.py
-    outs:
-    - output/vectorizer.jbl
-    - output/splits/X_train.jbl
-    - output/splits/X_test.jbl
-    - output/splits/y_train.jbl
-    - output/splits/y_test.jbl
+    - output/processed_data.pk1
+    - output/vectorizer.pkl
   train:
-    cmd: python training/train_model.py
+    cmd: python -m review_rating.modeling train --input-dir output --output-model
+      output/
     deps:
-    - training/train_model.py
+    - review_rating/
     outs:
     - output/model-gauss.jbl
     - output/model-multi.jbl
   analyze:
-    cmd: python training/get_metrics.py
+    cmd: python -m review_rating.modeling evaluate --input-dir output --model-path
+      output/ --metrics-path output/metrics.json
     deps:
-    - training/get_metrics.py
+    - review_rating/
     outs:
     - output/metrics.json
+
 metrics:
 - output/metrics.json
 params:
 - dvclive/params.yaml
 artifacts:
-  model:
-    path: output/model.jbl
-    type: model
   model-multi:
-    path: output/model-multi.jbl
+    path: processed/model-multi.jbl
     type: model
   model-gauss:
-    path: output/model-gauss.jbl
+    path: processed/model-gauss.jbl
     type: model
