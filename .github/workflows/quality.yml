@@ -70,7 +70,7 @@ jobs:
       
           # Set badge color gradient
           if (( $(echo "$SCORE >= 9.5" | bc -l) )); then
-            COLOR="brightgreen"
+            COLOR="blue"
           elif (( $(echo "$SCORE >= 8.5" | bc -l) )); then
             COLOR="green"
           elif (( $(echo "$SCORE >= 7.5" | bc -l) )); then
