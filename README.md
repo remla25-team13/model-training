@@ -1,7 +1,7 @@
 # model-training
 
 ![Build](https://github.com/remla25-team13/model-training/actions/workflows/quality.yml/badge.svg)
-![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)
+![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)logoColor=white)
 
 <!--still need to be done dynamically!-->
 ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
