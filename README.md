@@ -4,8 +4,8 @@
 ![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)
 
 <!--still need to be done dynamically!-->
-![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
-![Bandit](https://img.shields.io/badge/security-bandit-yellow)
+<!-- ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
+![Bandit](https://img.shields.io/badge/security-bandit-yellow) -->
 
 ![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-blue?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-NA-lightgrey?logo=python&logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
 

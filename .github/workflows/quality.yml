@@ -136,3 +136,15 @@ jobs:
         run: |
           pip install bandit
           bandit -r training
+
+
+      - name: Calculate ML Test Score
+        run: |
+          echo "## ML Test Score Summary"
+          pytest -m "feature" --maxfail=0 | tee >(grep -c "PASSED" > .score_feature)
+          pytest -m "model_dev" --maxfail=0 | tee >(grep -c "PASSED" > .score_model)
+          pytest -m "ml_infra" --maxfail=0 | tee >(grep -c "PASSED" > .score_infra)
+          pytest -m "monitoring" --maxfail=0 | tee >(grep -c "PASSED" > .score_monitor)
+      
+          SCORE=$(( $(cat .score_feature) + $(cat .score_model) + $(cat .score_infra) + $(cat .score_monitor) ))
+          echo "Total tests passed (ML adequacy): $SCORE"
