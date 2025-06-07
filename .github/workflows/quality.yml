@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GDRIVE_CEDENTIALS_DATA: ${{ secrrets.GDRIVE_CREDENTIALS_DATA }}
 
     steps:
       - name: Checkout code
