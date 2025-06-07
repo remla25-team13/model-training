@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GDRIVE_CEDENTIALS_DATA: ${{ secrrets.GDRIVE_CREDENTIALS_DATA }}
+      GDRIVE_CEDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
 
     steps:
       - name: Checkout code
