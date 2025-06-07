@@ -5,15 +5,15 @@ stages:
     deps:
     - path: training/get_data.py
       hash: md5
-      md5: f51092c1b091e1c6681046ac34b573ae
-      size: 170
+      md5: 0215d09b6977cb5742ba2814bb4037f8
+      size: 488
   preprocess:
     cmd: python training/preprocessing.py
     deps:
     - path: training/preprocessing.py
       hash: md5
-      md5: f6c03d361aad04c8523668dc844535af
-      size: 631
+      md5: 8dbc4bc8c5cd97c043da83d7feae2715
+      size: 638
     outs:
     - path: output/corpus.jbl
       hash: md5
@@ -68,8 +68,8 @@ stages:
     deps:
     - path: training/train_model.py
       hash: md5
-      md5: 057cee3a0d2f6dad26d84cb84747dda1
-      size: 826
+      md5: 442d5437950360ef36fc5867d22cba41
+      size: 868
     outs:
     - path: output/model-gauss.jbl
       hash: md5
@@ -84,10 +84,10 @@ stages:
     deps:
     - path: training/get_metrics.py
       hash: md5
-      md5: f70bc5fd00607a1bf6dbf7570ff5754b
-      size: 935
+      md5: 6a670cb4c92399f896fc99aa031020b2
+      size: 1018
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: c6787d2f25576bd22611eb76e72a44d1
-      size: 252
+      md5: 8e5bf1b26023c39cb6f870ca30d774f1
+      size: 304
