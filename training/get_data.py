@@ -1,7 +1,7 @@
 """ Download relevant data """
 
 import nltk
-from dvc.api import open as dvc_open 
+from dvc.api import open as dvc_open
 import pandas as pd
 
 
