@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "model_training"
+dynamic = ["version"]
+description = "Model training package"
+authors = [
+    { name = "remla25-team13" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "lib_ml @ git+https://github.com/remla25-team13/lib-ml.git@v1.0.1-dev1",
+    "loguru==0.7.3",
+    "scikit-learn==1.6.1",
+    "pandas==2.2.3",
+    "joblib==1.5.1"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
