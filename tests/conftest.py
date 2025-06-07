@@ -14,7 +14,7 @@ from training.get_metrics import get_metrics
 MODEL_PATH_A = "output/model-gauss.jbl"
 MODEL_PATH_B = "output/model-multi.jbl"
 VECTORIZER_PATH = "output/vectorizer.jbl"
-DATASET_PATH = "output/reviews.tsv"
+DATASET_PATH = "output/reviews-latest.tsv"
 
 @pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
