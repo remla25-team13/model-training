@@ -52,37 +52,37 @@ def dataset():
 
 
 @pytest.fixture(scope="session")
-def preprocessor():
+def text_preprocessor():
     """Create a Preprocessor instance."""
     return Preprocessor()
 
 
 @pytest.fixture(scope="session")
-def review_corpus(dataset, preprocessor):
+def review_corpus(raw_dataset, preproc):
     """Preprocess reviews into a corpus."""
-    return [preprocessor.preprocess(review) for review in dataset["Review"][:900]]
+    return [preproc.preprocess(r) for r in raw_dataset["Review"][:900]]
 
 
 @pytest.fixture(scope="session")
-def vectorizer(review_corpus):
+def vectorizer(preprocessed_reviews):
     """Fit CountVectorizer to corpus."""
     cv = CountVectorizer(max_features=1420)
-    cv.fit(review_corpus)
+    cv.fit(preprocessed_reviews)
     return cv
 
 
 @pytest.fixture(scope="session")
-def features_and_labels(review_corpus, dataset, vectorizer):
+def features_and_labels(preproc_reviews, raw_dataset, text_vectorizer):
     """Return features and labels."""
-    features = vectorizer.transform(review_corpus).toarray()
-    labels = dataset.iloc[:900, -1].to_numpy()
+    features = text_vectorizer.transform(preproc_reviews).toarray()
+    labels = raw_dataset.iloc[:900, -1].to_numpy()
     return features, labels
 
 
 @pytest.fixture(scope="session")
-def split_data(features_and_labels):
+def split_data(feat_label_data):
     """Split data into train/test sets."""
-    features, labels = features_and_labels
+    features, labels = feat_label_data
     return train_test_split(features, labels, test_size=0.2, random_state=0)
 
 

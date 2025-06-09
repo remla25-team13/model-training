@@ -34,7 +34,7 @@ dvc repro
 
 ## 🔒 Linters Used
 
-- **Pylint** with a custom plugin detecting ML-specific code smells (`fit()` without `y`, `predict(X_train)`)
+- **Pylint** with a custom plugin detecting ML-specific code smells 
 - **Flake8** with a non-default configuration: increased line length, common ignore rules
 - **Bandit** with a tailored `bandit.yaml` to focus on relevant Python security risks
 
@@ -47,9 +47,8 @@ This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) tha
 
 | Rule ID  | Description                                                                 |
 |----------|-----------------------------------------------------------------------------|
-| `W9001`  | `fit()` called with only one argument — possible missing `y`               |
-| `W9002`  | `predict()` called on training data (`X_train`) — may indicate data leakage|
-| `W9003`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |
+| `W9001`  | `predict()` called on training data (`X_train`) — may indicate data leakage|
+| `W9002`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |
 
 These checks are integrated into our CI using `pylint` with a custom `.pylintrc` and are automatically run and scored.
 

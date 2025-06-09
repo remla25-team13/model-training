@@ -11,7 +11,7 @@ Functions:
         Asserts that the accuracy score is greater than 0.6.
 """
 
-def test_model_fit_input_shape(split_data, classifier):
+def test_model_fit_input_shape(split_data):
     """Check classifier training input shapes."""
     x_train, _, y_train, _ = split_data
     assert len(x_train) == len(y_train)
