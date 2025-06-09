@@ -2,8 +2,6 @@ from pylint.checkers import BaseChecker
 
 
 class MLCodeSmellChecker(BaseChecker):
-    pass  
-
     name = "ml-code-smells"
     priority = -1
     msgs = {
@@ -16,6 +14,11 @@ class MLCodeSmellChecker(BaseChecker):
             "predict() called on training data (X_train) — did you mean X_test?",
             "predict-on-training-data",
             "Avoid evaluating model on training data. Use X_test instead of X_train.",
+        ),
+        "W9003": (
+            "Use df.to_numpy() instead of df.values for conversion",
+            "values-attribute-misused",
+            "Using .values may return inconsistent types; prefer df.to_numpy().",
         ),
     }
 
@@ -32,6 +35,11 @@ class MLCodeSmellChecker(BaseChecker):
             arg = node.args[0]
             if hasattr(arg, "name") and arg.name == "X_train":
                 self.add_message("predict-on-training-data", node=node)
+
+    def visit_attribute(self, node):
+        # --- Check for `df.values` usage ---
+        if node.attrname == "values":
+            self.add_message("values-attribute-misused", node=node)
 
 
 def register(linter):

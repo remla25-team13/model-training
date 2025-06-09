@@ -34,20 +34,25 @@ dvc repro
 
 ## 🔒 Linters Used
 
-| Tool     | Purpose                            | Configuration        |
-|----------|------------------------------------|-----------------------|
-| `pylint` | Logic issues, structure, ML rules  | `.pylintrc`, plugin   |
-| `flake8` | PEP-8 compliance                   | `.flake8`             |
-| `bandit` | Security vulnerability scanning    | `bandit.yaml`         |
+- **Pylint** with a custom plugin detecting ML-specific code smells (`fit()` without `y`, `predict(X_train)`)
+- **Flake8** with a non-default configuration: increased line length, common ignore rules
+- **Bandit** with a tailored `bandit.yaml` to focus on relevant Python security risks
 
-## 🔍 Custom Pylint Rules
+All linters are run automatically in the GitHub Actions workflow.
 
-This project includes custom Pylint rules defined in `pylint_plugins/ml_checks.py` to catch common ML code issues:
 
-- `fit-missing-y`: Warns when `.fit(X)` is called with only one argument — possible missing labels.
-- `predict-on-training-data`: Warns when `.predict(X_train)` is used — this may indicate you're evaluating on training data instead of a test split.
+## 🤖 Custom Pylint Rules for ML Code Smells
 
-These rules are automatically enforced in CI.
+This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) that implements multiple ML-specific code smell detectors inspired by [ml-smells](https://hynn01.github.io/ml-smells/). These rules help prevent common mistakes in data science and machine learning workflows:
+
+| Rule ID  | Description                                                                 |
+|----------|-----------------------------------------------------------------------------|
+| `W9001`  | `fit()` called with only one argument — possible missing `y`               |
+| `W9002`  | `predict()` called on training data (`X_train`) — may indicate data leakage|
+| `W9003`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |
+
+These checks are integrated into our CI using `pylint` with a custom `.pylintrc` and are automatically run and scored.
+
 
 ## Related Repositories
 - [lib-ml](https://github.com/remla25-team13/lib-ml)
