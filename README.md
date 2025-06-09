@@ -43,7 +43,7 @@ All linters are run automatically in the GitHub Actions workflow.
 
 ## 🤖 Custom Pylint Rules for ML Code Smells
 
-This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) that implements multiple ML-specific code smell detectors inspired by [ml-smells](https://hynn01.github.io/ml-smells/). These rules help prevent common mistakes in data science and machine learning workflows:
+This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) that also implements a ML-specific code smell detector inspired by [ml-smells](https://hynn01.github.io/ml-smells/). These rules help prevent common mistakes in data science and machine learning workflows:
 
 | Rule ID  | Description                                                                 |
 |----------|-----------------------------------------------------------------------------|
