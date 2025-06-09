@@ -1,0 +1,6 @@
+-r requirements.txt
+nltk
+pytest
+pytest-cov
+pylint
+flake8
