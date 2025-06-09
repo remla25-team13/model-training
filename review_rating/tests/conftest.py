@@ -1,3 +1,7 @@
+"""
+Pytest fixtures for training, preprocessing, and data loading.
+"""
+
 import os
 import joblib
 import pandas as pd
@@ -54,32 +58,32 @@ def preprocessor():
 
 
 @pytest.fixture(scope="session")
-def corpus(dataset, preprocessor):
+def review_corpus(dataset, preprocessor):
     """Preprocess reviews into a corpus."""
     return [preprocessor.preprocess(review) for review in dataset["Review"][:900]]
 
 
 @pytest.fixture(scope="session")
-def vectorizer(corpus):
+def vectorizer(review_corpus):
     """Fit CountVectorizer to corpus."""
     cv = CountVectorizer(max_features=1420)
-    cv.fit(corpus)
+    cv.fit(review_corpus)
     return cv
 
 
 @pytest.fixture(scope="session")
-def xy(corpus, dataset, vectorizer):
+def features_and_labels(review_corpus, dataset, vectorizer):
     """Return features and labels."""
-    X = vectorizer.transform(corpus).toarray()
-    y = dataset.iloc[:900, -1].values
-    return X, y
+    features = vectorizer.transform(review_corpus).toarray()
+    labels = dataset.iloc[:900, -1].to_numpy()
+    return features, labels
 
 
 @pytest.fixture(scope="session")
-def split_data(xy):
+def split_data(features_and_labels):
     """Split data into train/test sets."""
-    X, y = xy
-    return train_test_split(X, y, test_size=0.2, random_state=0)
+    features, labels = features_and_labels
+    return train_test_split(features, labels, test_size=0.2, random_state=0)
 
 
 @pytest.fixture(scope="session")

@@ -48,7 +48,7 @@ def prepare_data(
     x = vectorizer.fit_transform(
         [Preprocessor().preprocess(review) for review in dataset["Review"]]
     ).toarray()
-    y = dataset["Liked"].values
+    y = dataset["Liked"].to_numpy()
 
     # Save vectorizer
     vectorizer_path = f"{output_dir}/vectorizer.pkl"

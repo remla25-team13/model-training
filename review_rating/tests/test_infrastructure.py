@@ -1,14 +1,21 @@
-import os
+"""
+Infrastructure Tests for Serialized Models and Vectorizer.
 
+This module tests whether trained models and vectorizer are correctly saved to disk
+and whether they can make predictions on new input text after loading.
+"""
+
+import os
 import joblib
 
 
 MODEL_PATH_A = "processed/model-gauss.jbl"
 MODEL_PATH_B = "processed/model-multi.jbl"
-VECTORIZER_PATH = "processed/vectorizer.jbl"
+VECTORIZER_PATH = "processed/vectorizer.pkl"
 
 
 def test_model_serialized():
+    """Check that models are saved and implement predict()."""
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         assert os.path.exists(model_path)
         model = joblib.load(model_path)
@@ -16,19 +23,20 @@ def test_model_serialized():
 
 
 def test_vectorizer_serialized():
-    assert os.path.exists("processed/vectorizer.pkl")
-    vec = joblib.load("processed/vectorizer.pkl")
-    assert hasattr(vec, "transform")
+    """Check that the vectorizer is saved and implements transform()."""
+    assert os.path.exists(VECTORIZER_PATH)
+    vectorizer = joblib.load(VECTORIZER_PATH)
+    assert hasattr(vectorizer, "transform")
 
 
 def test_prediction_pipeline(preprocessor):
+    """Test end-to-end prediction using serialized model and vectorizer."""
     text = "This place was not great"
-    vec = joblib.load("processed/vectorizer.pkl")
+    vectorizer = joblib.load(VECTORIZER_PATH)
 
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         model = joblib.load(model_path)
-
         processed = preprocessor.preprocess(text)
-        X = vec.transform([processed]).toarray()
-        pred = model.predict(X)
-        assert pred[0] in [0, 1]
+        features = vectorizer.transform([processed]).toarray()
+        prediction = model.predict(features)
+        assert prediction[0] in [0, 1]
