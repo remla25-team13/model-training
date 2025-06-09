@@ -36,11 +36,11 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          pylint training --rcfile=.pylintrc
+          pylint review_rating/modeling --rcfile=.pylintrc
 
       - name: Save pylint score
         run: |
-          pylint training > pylint-report.txt || true
+          pylint review_rating/modeling > pylint-report.txt || true
           grep "Your code has been rated at" pylint-report.txt > pylint-score.md || echo "Pylint score not found" > pylint-score.md
           
       - name: Upload pylint score
@@ -67,7 +67,7 @@ jobs:
           PYTHONPATH: .
         run: |
           pip install pylint bc
-          pylint training tests --rcfile=.pylintrc --score=y > pylint_output.txt || true
+          pylint review_rating/modeling review_rating/tests --rcfile=.pylintrc --score=y > pylint_output.txt || true
           SCORE=$(grep "Your code has been rated at" pylint_output.txt | awk '{print $7}' | cut -d'/' -f1)
           SCORE_CLEAN=$(printf "%.2f" "$SCORE")
       
@@ -131,12 +131,12 @@ jobs:
       - name: Run flake8
         run: |
           pip install flake8
-          flake8 training
+          flake8 review_rating/modeling
 
       - name: Run Bandit
         run: |
           pip install bandit
-          bandit -r training
+          bandit -r review_rating/modeling
 
 
       - name: Calculate ML Test Score
