@@ -1,12 +1,7 @@
 stages:
-  get_data:
-    cmd: wget -O a1_RestaurantReviews_HistoricDump.tsv 
-      https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
-    outs:
-    - a1_RestaurantReviews_HistoricDump.tsv
   preprocess:
-    cmd: python -m review_rating.modeling prepare a1_RestaurantReviews_HistoricDump.tsv
-      -o output -t 0.1
+    cmd: python -m review_rating.modeling prepare reviews-latest.tsv -o output -t
+      0.1
     deps:
     - review_rating/
     outs:
@@ -34,8 +29,8 @@ params:
 - dvclive/params.yaml
 artifacts:
   model-multi:
-    path: processed/model-multi.jbl
+    path: output/model-multi.jbl
     type: model
   model-gauss:
-    path: processed/model-gauss.jbl
+    path: output/model-gauss.jbl
     type: model

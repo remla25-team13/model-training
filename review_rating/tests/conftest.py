@@ -13,7 +13,7 @@ from review_rating.modeling.train import train_model
 MODEL_PATH_A = "processed/model-gauss.jbl"
 MODEL_PATH_B = "processed/model-multi.jbl"
 VECTORIZER_PATH = "processed/vectorizer.pkl"
-DATASET_PATH = "output/reviews.tsv"
+DATASET_PATH = "output/reviews-latest.tsv"
 
 
 @pytest.fixture(scope="session", autouse=True)

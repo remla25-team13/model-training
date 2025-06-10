@@ -1,13 +1,20 @@
 """Model training package"""
 
 from loguru import logger
+import nltk
 import pandas as pd
+from dvc.api import open as dvc_open
 
 
-def load_data(filepath: str = "a1_RestaurantReviews_HistoricDump.tsv") -> pd.DataFrame:
+def load_data(filepath: str = "output/reviews.tsv") -> pd.DataFrame:
     """Load dataset from TSV file."""
-    dataset = pd.read_csv(filepath, delimiter="\t", quoting=3)
-    logger.info(
-        f"Loaded {len(dataset)} rows and {len(dataset.columns)} columns from the TSV file."
-    )
-    return dataset
+    nltk.download("stopwords")
+
+    with dvc_open("output/reviews-latest.tsv", mode='r') as f:
+        dataset = pd.read_csv(f, delimiter="\t", quoting=3)
+
+        dataset.to_csv('output/reviews-latest.tsv', sep="\t", quoting=3, index=False)
+
+        print("Saved latest reviews version from DVC")
+
+        return dataset
