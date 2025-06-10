@@ -1,6 +1,5 @@
 """Model training package"""
 
-from loguru import logger
 import nltk
 import pandas as pd
 from dvc.api import open as dvc_open
