@@ -20,7 +20,7 @@ DATASET_PATH = "output/reviews-latest.tsv"
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
     prepare_data(
-        input_path=DATASET_PATH,
+        input_path="output/reviews.tsv",
         output_dir="processed",
         test_split=0.2,
         random_state=42,
