@@ -1,22 +1,13 @@
 schema: '2.0'
 stages:
-  get_data:
-    cmd: wget -O a1_RestaurantReviews_HistoricDump.tsv 
-      https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
-    outs:
-    - path: a1_RestaurantReviews_HistoricDump.tsv
-      hash: md5
-      md5: 102f1f4193e0bdebdd6cce7f13e0a839
-      size: 54686
   preprocess:
-    cmd: python -m review_rating.modeling prepare reviews-latest.tsv -o output -t
-      0.1
+    cmd: python -m review_rating.modeling prepare reviews.tsv -o output -t 0.1
     deps:
     - path: review_rating/
       hash: md5
-      md5: ccb062fbe11f7dae17b17b041a0d846d.dir
-      size: 29585
-      nfiles: 19
+      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
+      size: 53106
+      nfiles: 25
     outs:
     - path: output/processed_data.pk1
       hash: md5
@@ -32,9 +23,9 @@ stages:
     deps:
     - path: review_rating/
       hash: md5
-      md5: ccb062fbe11f7dae17b17b041a0d846d.dir
-      size: 29585
-      nfiles: 19
+      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
+      size: 53106
+      nfiles: 25
     outs:
     - path: output/model-gauss.jbl
       hash: md5
@@ -50,11 +41,11 @@ stages:
     deps:
     - path: review_rating/
       hash: md5
-      md5: ccb062fbe11f7dae17b17b041a0d846d.dir
-      size: 29585
-      nfiles: 19
+      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
+      size: 53106
+      nfiles: 25
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: 1f1e501fff9869b982c8bdea7761399d
+      md5: a7d28ad906beed231ccb7292af2f2e59
       size: 290

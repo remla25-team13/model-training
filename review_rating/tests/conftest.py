@@ -20,7 +20,7 @@ DATASET_PATH = "output/reviews-latest.tsv"
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
     prepare_data(
-        input_path="data/raw/a1_RestaurantReviews_HistoricDump.tsv",
+        input_path=DATASET_PATH,
         output_dir="processed",
         test_split=0.2,
         random_state=42,
@@ -43,7 +43,7 @@ def build_artifacts():
 @pytest.fixture(scope="session")
 def dataset():
     return pd.read_csv(
-        "data/raw/a1_RestaurantReviews_HistoricDump.tsv", delimiter="\t", quoting=3
+        DATASET_PATH, delimiter="\t", quoting=3
     )
 
 
