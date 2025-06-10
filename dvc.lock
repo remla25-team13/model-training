@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python -m review_rating.modeling prepare reviews.tsv -o output -t 0.1
+    cmd: python -m review_rating.modeling prepare output/reviews.tsv -o output -t 0.1
     deps:
     - path: review_rating/
       hash: md5
