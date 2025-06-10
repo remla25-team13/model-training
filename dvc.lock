@@ -1,12 +1,13 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python -m review_rating.modeling prepare output/reviews.tsv -o output -t 0.1
+    cmd: python -m review_rating.modeling prepare output/reviews.tsv -o output -t
+      0.1
     deps:
     - path: review_rating/
       hash: md5
-      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
-      size: 53106
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
       nfiles: 25
     outs:
     - path: output/processed_data.pk1
@@ -23,8 +24,8 @@ stages:
     deps:
     - path: review_rating/
       hash: md5
-      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
-      size: 53106
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
       nfiles: 25
     outs:
     - path: output/model-gauss.jbl
@@ -41,11 +42,11 @@ stages:
     deps:
     - path: review_rating/
       hash: md5
-      md5: 0cf7fb6f5c56e87d4187eccf4aa00e34.dir
-      size: 53106
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
       nfiles: 25
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: a7d28ad906beed231ccb7292af2f2e59
+      md5: 5c97e85129bdd3e1d991f3ba3743e11a
       size: 290

@@ -1,6 +1,7 @@
 stages:
   preprocess:
-    cmd: python -m review_rating.modeling prepare reviews.tsv -o output -t 0.1
+    cmd: python -m review_rating.modeling prepare output/reviews.tsv -o output -t
+      0.1
     deps:
     - review_rating/
     outs:
