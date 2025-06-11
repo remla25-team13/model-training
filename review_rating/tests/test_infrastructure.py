@@ -1,9 +1,4 @@
-"""
-Infrastructure Tests for Serialized Models and Vectorizer.
-
-This module tests whether trained models and vectorizer are correctly saved to disk
-and whether they can make predictions on new input text after loading.
-"""
+"""Test the infrastructure of the review rating package."""
 
 import os
 import joblib
@@ -11,11 +6,11 @@ import joblib
 
 MODEL_PATH_A = "processed/model-gauss.jbl"
 MODEL_PATH_B = "processed/model-multi.jbl"
-VECTORIZER_PATH = "processed/vectorizer.pkl"
+VECTORIZER_PATH = "processed/vectorizer.jbl"
 
 
 def test_model_serialized():
-    """Check that models are saved and implement predict()."""
+    """Check that the models are serialized and can be loaded."""
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         assert os.path.exists(model_path)
         model = joblib.load(model_path)
@@ -23,20 +18,21 @@ def test_model_serialized():
 
 
 def test_vectorizer_serialized():
-    """Check that the vectorizer is saved and implements transform()."""
-    assert os.path.exists(VECTORIZER_PATH)
-    vectorizer = joblib.load(VECTORIZER_PATH)
-    assert hasattr(vectorizer, "transform")
+    """Check that the vectorizer is serialized and can be loaded."""
+    assert os.path.exists("processed/vectorizer.pkl")
+    vec = joblib.load("processed/vectorizer.pkl")
+    assert hasattr(vec, "transform")
 
 
-def test_prediction_pipeline(text_preprocessor):
-    """Test end-to-end prediction using serialized model and vectorizer."""
+def test_prediction_pipeline(preprocessor):
+    """Test the end-to-end prediction pipeline."""
     text = "This place was not great"
-    vectorizer = joblib.load(VECTORIZER_PATH)
+    vec = joblib.load("processed/vectorizer.pkl")
 
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         model = joblib.load(model_path)
-        processed = text_preprocessor.preprocess(text)
-        features = vectorizer.transform([processed]).toarray()
-        prediction = model.predict(features)
-        assert prediction[0] in [0, 1]
+
+        processed = preprocessor.preprocess(text)
+        X = vec.transform([processed]).toarray()
+        pred = model.predict(X)
+        assert pred[0] in [0, 1]

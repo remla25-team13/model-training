@@ -1,7 +1,6 @@
 """
 Pytest fixtures for training, preprocessing, and data loading.
 """
-
 import os
 import joblib
 import pandas as pd
@@ -45,48 +44,50 @@ def build_artifacts():
 
 @pytest.fixture(scope="session")
 def dataset():
-    """Load raw dataset for testing."""
+    """Load the dataset from the TSV file."""
     return pd.read_csv(
         "data/raw/a1_RestaurantReviews_HistoricDump.tsv", delimiter="\t", quoting=3
     )
 
 
 @pytest.fixture(scope="session")
-def text_preprocessor():
-    """Create a Preprocessor instance."""
+def preprocessor():
+    """Create a preprocessor instance."""
     return Preprocessor()
 
 
 @pytest.fixture(scope="session")
-def review_corpus(raw_dataset, preproc):
-    """Preprocess reviews into a corpus."""
-    return [preproc.preprocess(r) for r in raw_dataset["Review"][:900]]
+def corpus(dataset, preprocessor):
+    """Preprocess the review text data."""
+    return [preprocessor.preprocess(review) for review in dataset["Review"][:900]]
 
 
 @pytest.fixture(scope="session")
-def vectorizer(preprocessed_reviews):
-    """Fit CountVectorizer to corpus."""
+def vectorizer(corpus):
+    """Create and fit a CountVectorizer on the corpus."""
     cv = CountVectorizer(max_features=1420)
-    cv.fit(preprocessed_reviews)
+    cv.fit(corpus)
     return cv
 
 
 @pytest.fixture(scope="session")
-def feat_label_data(preproc_reviews, raw_dataset, text_vectorizer):
-    """Return features and labels."""
-    features = text_vectorizer.transform(preproc_reviews).toarray()
-    labels = raw_dataset.iloc[:900, -1].to_numpy()
-    return features, labels
+def X_y(corpus, dataset, vectorizer):
+    """Transform the corpus into feature vectors and extract labels."""
+    X = vectorizer.transform(corpus).toarray()
+    y = dataset.iloc[:900, -1].to_numpy()
+    return X, y
 
 
 @pytest.fixture(scope="session")
-def split_data(feat_label_data):
-    """Split data into train/test sets."""
-    features, labels = feat_label_data
-    return train_test_split(features, labels, test_size=0.2, random_state=0)
+def split_data(X_y):
+    """Split the data into training and testing sets."""
+    X, y = X_y
+    return train_test_split(X, y, test_size=0.2, random_state=0)
 
 
 @pytest.fixture(scope="session")
 def classifier():
-    """Load trained classifier."""
-    return joblib.load(MODEL_PATH_B)
+    """Load the trained classifiers."""
+    clf = joblib.load(MODEL_PATH_A)
+    clf = joblib.load(MODEL_PATH_B)
+    return clf
