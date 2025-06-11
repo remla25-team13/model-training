@@ -1,5 +1,7 @@
+"""
+Pytest fixtures for training, preprocessing, and data loading.
+"""
 import os
-
 import joblib
 import pandas as pd
 import pytest
@@ -42,6 +44,7 @@ def build_artifacts():
 
 @pytest.fixture(scope="session")
 def dataset():
+    """Load the dataset from the TSV file."""
     return pd.read_csv(
         "data/raw/a1_RestaurantReviews_HistoricDump.tsv", delimiter="\t", quoting=3
     )
@@ -49,16 +52,19 @@ def dataset():
 
 @pytest.fixture(scope="session")
 def preprocessor():
+    """Create a preprocessor instance."""
     return Preprocessor()
 
 
 @pytest.fixture(scope="session")
 def corpus(dataset, preprocessor):
+    """Preprocess the review text data."""
     return [preprocessor.preprocess(review) for review in dataset["Review"][:900]]
 
 
 @pytest.fixture(scope="session")
 def vectorizer(corpus):
+    """Create and fit a CountVectorizer on the corpus."""
     cv = CountVectorizer(max_features=1420)
     cv.fit(corpus)
     return cv
@@ -66,19 +72,22 @@ def vectorizer(corpus):
 
 @pytest.fixture(scope="session")
 def X_y(corpus, dataset, vectorizer):
+    """Transform the corpus into feature vectors and extract labels."""
     X = vectorizer.transform(corpus).toarray()
-    y = dataset.iloc[:900, -1].values
+    y = dataset.iloc[:900, -1].to_numpy()
     return X, y
 
 
 @pytest.fixture(scope="session")
 def split_data(X_y):
+    """Split the data into training and testing sets."""
     X, y = X_y
     return train_test_split(X, y, test_size=0.2, random_state=0)
 
 
 @pytest.fixture(scope="session")
-def classifier(split_data):
+def classifier():
+    """Load the trained classifiers."""
     clf = joblib.load(MODEL_PATH_A)
     clf = joblib.load(MODEL_PATH_B)
     return clf

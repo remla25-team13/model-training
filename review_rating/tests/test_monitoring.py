@@ -1,15 +1,14 @@
 """
 This module contains tests for monitoring model performance and data drift.
-
 Functions:
     test_prediction_drift(split_data, classifier):
         Tests whether the classifier's prediction accuracy on the test set
         deviates significantly from a predefined baseline accuracy.
-
     test_data_distribution_drift(split_data):
         Tests whether the mean feature values of the training and test sets
         differ significantly, indicating potential data distribution drift.
 """
+
 
 import numpy as np
 from sklearn.metrics import accuracy_score
@@ -25,12 +24,11 @@ def test_prediction_drift(split_data, classifier):
         The absolute difference between the current accuracy and the baseline accuracy (0.9) is less than 0.15,
         indicating no significant prediction drift has occurred.
     """
-
-    _, X_test, _, y_test = split_data
-    y_pred = classifier.predict(X_test)
+    _, x_test, _, y_test = split_data
+    y_pred = classifier.predict(x_test)
     baseline = 0.9
-    acc = accuracy_score(y_test, y_pred)
-    assert abs(acc - baseline) < 0.15
+    accuracy = accuracy_score(y_test, y_pred)
+    assert abs(accuracy - baseline) < 0.15
 
 
 def test_data_distribution_drift(split_data):
@@ -47,9 +45,8 @@ def test_data_distribution_drift(split_data):
     Raises:
         AssertionError: If the mean drift between training and test data exceeds 0.1.
     """
-
-    X_train, X_test, _, _ = split_data
-    train_mean = np.mean(X_train, axis=0)
-    test_mean = np.mean(X_test, axis=0)
+    x_train, x_test, _, _ = split_data
+    train_mean = np.mean(x_train, axis=0)
+    test_mean = np.mean(x_test, axis=0)
     drift = np.abs(train_mean - test_mean)
     assert np.mean(drift) < 0.1
