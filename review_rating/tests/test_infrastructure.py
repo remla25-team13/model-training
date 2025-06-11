@@ -29,14 +29,14 @@ def test_vectorizer_serialized():
     assert hasattr(vectorizer, "transform")
 
 
-def test_prediction_pipeline(preprocessor):
+def test_prediction_pipeline(text_preprocessor):
     """Test end-to-end prediction using serialized model and vectorizer."""
     text = "This place was not great"
     vectorizer = joblib.load(VECTORIZER_PATH)
 
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         model = joblib.load(model_path)
-        processed = preprocessor.preprocess(text)
+        processed = text_preprocessor.preprocess(text)
         features = vectorizer.transform([processed]).toarray()
         prediction = model.predict(features)
         assert prediction[0] in [0, 1]

@@ -72,7 +72,7 @@ def vectorizer(preprocessed_reviews):
 
 
 @pytest.fixture(scope="session")
-def features_and_labels(preproc_reviews, raw_dataset, text_vectorizer):
+def feat_label_data(preproc_reviews, raw_dataset, text_vectorizer):
     """Return features and labels."""
     features = text_vectorizer.transform(preproc_reviews).toarray()
     labels = raw_dataset.iloc[:900, -1].to_numpy()
