@@ -9,8 +9,10 @@ Functions:
         differ significantly, indicating potential data distribution drift.
 """
 
+
 import numpy as np
 from sklearn.metrics import accuracy_score
+
 
 def test_prediction_drift(split_data, classifier):
     """
@@ -27,6 +29,7 @@ def test_prediction_drift(split_data, classifier):
     baseline = 0.9
     accuracy = accuracy_score(y_test, y_pred)
     assert abs(accuracy - baseline) < 0.15
+
 
 def test_data_distribution_drift(split_data):
     """
