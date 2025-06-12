@@ -1,5 +1,6 @@
-import os
+"""Test the infrastructure of the review rating package."""
 
+import os
 import joblib
 
 
@@ -9,6 +10,7 @@ VECTORIZER_PATH = "processed/vectorizer.jbl"
 
 
 def test_model_serialized():
+    """Check that the models are serialized and can be loaded."""
     for model_path in [MODEL_PATH_A, MODEL_PATH_B]:
         assert os.path.exists(model_path)
         model = joblib.load(model_path)
@@ -16,12 +18,14 @@ def test_model_serialized():
 
 
 def test_vectorizer_serialized():
+    """Check that the vectorizer is serialized and can be loaded."""
     assert os.path.exists("processed/vectorizer.pkl")
     vec = joblib.load("processed/vectorizer.pkl")
     assert hasattr(vec, "transform")
 
 
 def test_prediction_pipeline(preprocessor):
+    """Test the end-to-end prediction pipeline."""
     text = "This place was not great"
     vec = joblib.load("processed/vectorizer.pkl")
 
