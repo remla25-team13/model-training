@@ -15,14 +15,14 @@ from review_rating.modeling.train import train_model
 MODEL_PATH_A = "processed/model-gauss.jbl"
 MODEL_PATH_B = "processed/model-multi.jbl"
 VECTORIZER_PATH = "processed/vectorizer.pkl"
-DATASET_PATH = "output/reviews.tsv"
+DATASET_PATH = "output/reviews-latest.tsv"
 
 
 @pytest.fixture(scope="session", autouse=True)
 def build_artifacts():
     """Run training script once per test session to generate model/vectorizer."""
     prepare_data(
-        input_path="data/raw/a1_RestaurantReviews_HistoricDump.tsv",
+        input_path="output/reviews.tsv",
         output_dir="processed",
         test_split=0.2,
         random_state=42,
@@ -46,7 +46,7 @@ def build_artifacts():
 def dataset():
     """Load the dataset from the TSV file."""
     return pd.read_csv(
-        "data/raw/a1_RestaurantReviews_HistoricDump.tsv", delimiter="\t", quoting=3
+        DATASET_PATH, delimiter="\t", quoting=3
     )
 
 

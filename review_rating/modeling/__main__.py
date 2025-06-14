@@ -8,7 +8,7 @@ from review_rating.modeling.evaluate import evaluate_model
 from review_rating.modeling.prepare_data import prepare_data
 from review_rating.modeling.train import train_model
 
-DEFAULT_DATA_PATH = "data/a1_RestaurantReviews_HistoricDump.tsv"
+DEFAULT_DATA_PATH = "data/reviews-latest.tsv"
 
 
 parser = argparse.ArgumentParser(

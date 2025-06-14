@@ -43,6 +43,8 @@ def prepare_data(
     # Load and preprocess data
     dataset = load_data(filepath=input_path)
 
+    print(dataset)
+
     # Preprocess text and vectorize
     vectorizer = CountVectorizer(max_features=max_features)
     x = vectorizer.fit_transform(
