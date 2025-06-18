@@ -112,12 +112,12 @@ jobs:
       - name: Run flake8
         run: |
           pip install flake8
-          flake8 review_rating/modeling
+          flake8 review_rating
 
       - name: Run Bandit
         run: |
           pip install bandit
-          bandit -r review_rating/modeling
+          bandit -r review_rating
 
 
       - name: Calculate ML Test Score
