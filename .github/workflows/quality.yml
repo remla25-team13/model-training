@@ -117,7 +117,7 @@ jobs:
       - name: Run Bandit
         run: |
           pip install bandit
-          bandit -r review_rating
+          bandit -r review_rating -c bandit.yaml
 
 
       - name: Calculate ML Test Score
