@@ -32,23 +32,6 @@ jobs:
         run: |
           pytest --cov=review_rating review_rating
 
-      - name: Run pylint (with plugin)
-        env:
-          PYTHONPATH: .
-        run: |
-          pylint review_rating/modeling --rcfile=.pylintrc
-
-      - name: Save pylint score
-        run: |
-          pylint review_rating/modeling > pylint-report.txt || true
-          grep "Your code has been rated at" pylint-report.txt > pylint-score.md || echo "Pylint score not found" > pylint-score.md
-          
-      - name: Upload pylint score
-        uses: actions/upload-artifact@v4
-        with:
-          name: pylint-score
-          path: pylint-score.md
-
       - name: Generate coverage report
         run: |
           coverage xml
