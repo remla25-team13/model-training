@@ -126,12 +126,13 @@ jobs:
         run: |
           echo "## ML Test Score Summary"
           
-          output=$(pytest review_rating/tests/ | tee tmp.txt)
+          output=$(pytest -v review_rating/tests/ | tee tmp.txt)
 
-          count_feature=$(grep -E "test_features_and_data\.py .* PASSED" tmp.txt | wc -l)
-          count_model=$(grep -E "test_model\.py .* PASSED" tmp.txt | wc -l)
-          count_infra=$(grep -E "test_infrastructure\.py .* PASSED" tmp.txt | wc -l)
-          count_monitor=$(grep -E "test_monitoring\.py .* PASSED" tmp.txt | wc -l)
+          count_feature=$(grep "test_features_and_data.py::" tmp.txt | grep -c PASSED)
+          count_model=$(grep "test_model.py::" tmp.txt | grep -c PASSED)
+          count_infra=$(grep "test_infrastructure.py::" tmp.txt | grep -c PASSED)
+          count_monitor=$(grep "test_monitoring.py::" tmp.txt | grep -c PASSED)
+
           
           echo "Feature tests passed: $count_feature"
           echo "Model tests passed: $count_model"
