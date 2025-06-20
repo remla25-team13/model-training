@@ -161,14 +161,17 @@ jobs:
       - name: Save ML score to file
         run: |
           echo "$score" > ml_score.txt
-
-      - name: Commit updated ML score
+     
+      - name: Commit updated ML score and badge (only on main)
+        if: github.ref == 'refs/heads/main'
         run: |
           mkdir -p metrics
           mv ml_score.txt metrics/ml_score.txt
+
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add metrics/ml_score.txt
-          git commit -m "Update ML score"
-          git push
-        
+
+          git add README.md metrics/ml_score.txt || echo "Nothing to add"
+          git commit -m "Update ML Test Score badge and metrics" || echo "No changes to commit"
+          git push || echo "Push skipped (e.g. PR build)"
+
