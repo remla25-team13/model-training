@@ -126,10 +126,10 @@ jobs:
         run: |
           echo "## ML Test Score Summary"
       
-          pytest tests/test_features_and_data.py | tee >(grep -c "PASSED" > .score_feature)
-          pytest tests/test_model.py | tee >(grep -c "PASSED" > .score_model)
-          pytest tests/test_infrastructure.py | tee >(grep -c "PASSED" > .score_infra)
-          pytest tests/test_monitoring.py | tee >(grep -c "PASSED" > .score_monitor)
+          pytest review_rating/tests/test_features_and_data.py | tee >(grep -c "PASSED" > .score_feature)
+          pytest review_rating/tests/test_model.py | tee >(grep -c "PASSED" > .score_model)
+          pytest review_rating/tests/test_infrastructure.py | tee >(grep -c "PASSED" > .score_infra)
+          pytest review_rating/tests/test_monitoring.py | tee >(grep -c "PASSED" > .score_monitor)
       
           score=0
           [ $(cat .score_feature) -gt 0 ] && score=$((score+1))
@@ -152,8 +152,8 @@ jobs:
           fi
 
           BADGE_URL="https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white"
-          BADGE="<!-- badge:ml-score --> ![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
-          sed -i "s|<!-- badge:ml-score -->.*|${BADGE}|" README.md
+          BADGE="![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
+          sed -i "s|.*|${BADGE}|" README.md
             
       - name: Save ML score to file
         run: |
