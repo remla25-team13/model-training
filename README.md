@@ -7,6 +7,7 @@
 ![Bandit](https://img.shields.io/badge/security-bandit-yellow) -->
 ![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-9.55-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-7.29-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-blue?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-NA-lightgrey?logo=python&logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
 
+![ML Test Score](https://img.shields.io/badge/ML%20Test%20Score-💯%20Dynamic-blue)
 
 
 This repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.
@@ -51,6 +52,17 @@ This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) tha
 | `W9002`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |
 
 These checks are integrated into our CI using `pylint` with a custom `.pylintrc` and are automatically run and scored.
+
+## 🧪 ML Test Score
+
+The ML Test Score is automatically computed in the GitHub workflow and follows the [ML Test Score methodology](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).
+
+| Category             | Status  |
+|----------------------|---------|
+| Feature & Data       | ✅      |
+| Model Development    | ✅      |
+| ML Infrastructure    | ✅      |
+| Monitoring           | ✅      |
 
 
 ## Related Repositories

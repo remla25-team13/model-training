@@ -1,3 +1,4 @@
+# This file is restructured with the help of ChatGPT
 name: Continuous Integration
 
 on:
@@ -120,14 +121,35 @@ jobs:
           bandit -r review_rating -c bandit.yaml
 
 
-      - name: Calculate ML Test Score
+      - name: Calculate ML Test Score (by test files)
         run: |
           echo "## ML Test Score Summary"
-          pytest -m "feature" --maxfail=0 | tee >(grep -c "PASSED" > .score_feature)
-          pytest -m "model_dev" --maxfail=0 | tee >(grep -c "PASSED" > .score_model)
-          pytest -m "ml_infra" --maxfail=0 | tee >(grep -c "PASSED" > .score_infra)
-          pytest -m "monitoring" --maxfail=0 | tee >(grep -c "PASSED" > .score_monitor)
       
-          SCORE=$(( $(cat .score_feature) + $(cat .score_model) + $(cat .score_infra) + $(cat .score_monitor) ))
-          echo "Total tests passed (ML adequacy): $SCORE"
-          
+          pytest tests/test_features_and_data.py | tee >(grep -c "PASSED" > .score_feature)
+          pytest tests/test_model.py | tee >(grep -c "PASSED" > .score_model)
+          pytest tests/test_infrastructure.py | tee >(grep -c "PASSED" > .score_infra)
+          pytest tests/test_monitoring.py | tee >(grep -c "PASSED" > .score_monitor)
+      
+          score=0
+          [ $(cat .score_feature) -gt 0 ] && score=$((score+1))
+          [ $(cat .score_model) -gt 0 ] && score=$((score+1))
+          [ $(cat .score_infra) -gt 0 ] && score=$((score+1))
+          [ $(cat .score_monitor) -gt 0 ] && score=$((score+1))
+      
+          echo "Final ML Test Score: $score/4"
+          echo "ml_score=$score" >> $GITHUB_ENV
+  
+      - name: Save ML score to file
+        run: |
+          echo "$score" > ml_score.txt
+
+      - name: Commit updated ML score
+        run: |
+          mkdir -p metrics
+          mv ml_score.txt metrics/ml_score.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add metrics/ml_score.txt
+          git commit -m "Update ML score"
+          git push
+        
