@@ -152,12 +152,12 @@ jobs:
           fi
 
           BADGE_URL="https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white"
-          BADGE="![ml-score](${BADGE_URL})"
+          # Create new badge line
+          BADGE="<!-- badge:ml-score --> ![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
 
-          # Replace existing badge in README.md
-          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md || echo "No ml-score badge found"
-
-  
+          # Replace the full line that starts with <!-- badge:ml-score -->
+          sed -i "s|<!-- badge:ml-score -->.*|${BADGE}|" README.md
+            
       - name: Save ML score to file
         run: |
           echo "$score" > ml_score.txt
