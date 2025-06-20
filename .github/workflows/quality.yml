@@ -160,7 +160,6 @@ jobs:
           echo "$score" > ml_score.txt
      
       - name: Commit updated ML score and badge (only on main)
-        if: github.ref == 'refs/heads/main'
         run: |
           mkdir -p metrics
           mv ml_score.txt metrics/ml_score.txt
