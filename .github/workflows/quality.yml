@@ -153,7 +153,7 @@ jobs:
 
           BADGE_URL="https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white"
           BADGE="![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
-          sed -i "s|.*|${BADGE}|" README.md
+          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md
             
       - name: Save ML score to file
         run: |

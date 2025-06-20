@@ -1,72 +1,72 @@
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest# model-traininglogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![Build](https://github.com/remla25-team13/model-training/actions/workflows/quality.yml/badge.svg)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest<!-- badge:coverage -->logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-69%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest<!-- badge:pylint -->logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-9.55-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-7.29-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-blue?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-NA-lightgrey?logo=python&logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest<!-- badge:ml-score -->logoColor=white)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestThis repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## FeatureslogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- Loads the historic restaurant reviews dataset.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- Preprocesses data using `lib-ml`.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- Trains and evaluates the sentiment model.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- Versions and releases the model for deployment.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## UsagelogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestClone the repository and run the training:logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest```bashlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestgit clone https://github.com/remla25-team13/model-training.gitlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestcd model-traininglogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestdocker build -t model-training .logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestdocker run --rm model-traininglogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest```logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestOr run the pipeline through DVC:logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest```bashlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestdvc reprologoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest```logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## 🔒 Linters UsedlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest![Bandit](https://img.shields.io/badge/security-bandit-yellow) logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- **Pylint** with a custom plugin detecting ML-specific code smells logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- **Flake8** with a non-default configuration: increased line length, common ignore ruleslogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- **Bandit** with a tailored `bandit.yaml` to focus on relevant Python security riskslogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestAll linters are run automatically in the GitHub Actions workflow.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## 🤖 Custom Pylint Rules for ML Code SmellslogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestThis project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) that also implements a ML-specific code smell detector inspired by [ml-smells](https://hynn01.github.io/ml-smells/). These rules help prevent common mistakes in data science and machine learning workflows:logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| Rule ID  | Description                                                                 |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest|----------|-----------------------------------------------------------------------------|logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| `W9001`  | `predict()` called on training data (`X_train`) — may indicate data leakage|logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| `W9002`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestThese checks are integrated into our CI using `pylint` with a custom `.pylintrc` and are automatically run and scored.logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## 🧪 ML Test ScorelogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestThe ML Test Score is automatically computed in the GitHub workflow and follows the [ML Test Score methodology](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| Category             | Status  |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest|----------------------|---------|logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| Feature & Data       | ✅      |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| Model Development    | ✅      |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| ML Infrastructure    | ✅      |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest| Monitoring           | ✅      |logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytestlogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest## Related RepositorieslogoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- [lib-ml](https://github.com/remla25-team13/lib-ml)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- [model-service](https://github.com/remla25-team13/model-service)logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest- [operation](https://github.com/remla25-team13/operation)logoColor=white)
+# model-training
+
+![Build](https://github.com/remla25-team13/model-training/actions/workflows/quality.yml/badge.svg)
+<!-- badge:coverage -->
+![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-70%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-69%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest![coverage](https://img.shields.io/badge/Coverage-unknown-lightgrey)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
+<!-- badge:pylint -->
+![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-9.55-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-7.29-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-7.34-yellow?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-blue?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-NA-lightgrey?logo=python&logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)logoColor=white)
+![ml-score](https://img.shields.io/badge/ML%20Test%20Score-0%2F4-red?logo=pytest<!-- badge:ml-score -->logoColor=white)
+
+
+This repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.
+
+## Features
+- Loads the historic restaurant reviews dataset.
+- Preprocesses data using `lib-ml`.
+- Trains and evaluates the sentiment model.
+- Versions and releases the model for deployment.
+
+## Usage
+Clone the repository and run the training:
+
+```bash
+git clone https://github.com/remla25-team13/model-training.git
+cd model-training
+docker build -t model-training .
+docker run --rm model-training
+```
+
+Or run the pipeline through DVC:
+```bash
+dvc repro
+```
+
+## 🔒 Linters Used
+
+![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
+![Bandit](https://img.shields.io/badge/security-bandit-yellow) 
+
+- **Pylint** with a custom plugin detecting ML-specific code smells 
+- **Flake8** with a non-default configuration: increased line length, common ignore rules
+- **Bandit** with a tailored `bandit.yaml` to focus on relevant Python security risks
+
+All linters are run automatically in the GitHub Actions workflow.
+
+
+## 🤖 Custom Pylint Rules for ML Code Smells
+
+This project includes a custom Pylint plugin (`pylint_plugins/ml_checks.py`) that also implements a ML-specific code smell detector inspired by [ml-smells](https://hynn01.github.io/ml-smells/). These rules help prevent common mistakes in data science and machine learning workflows:
+
+| Rule ID  | Description                                                                 |
+|----------|-----------------------------------------------------------------------------|
+| `W9001`  | `predict()` called on training data (`X_train`) — may indicate data leakage|
+| `W9002`  | `.values` used on DataFrames — prefer `df.to_numpy()`                      |
+
+These checks are integrated into our CI using `pylint` with a custom `.pylintrc` and are automatically run and scored.
+
+## 🧪 ML Test Score
+
+The ML Test Score is automatically computed in the GitHub workflow and follows the [ML Test Score methodology](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/).
+
+| Category             | Status  |
+|----------------------|---------|
+| Feature & Data       | ✅      |
+| Model Development    | ✅      |
+| ML Infrastructure    | ✅      |
+| Monitoring           | ✅      |
+
+
+## Related Repositories
+- [lib-ml](https://github.com/remla25-team13/lib-ml)
+- [model-service](https://github.com/remla25-team13/model-service)
+- [operation](https://github.com/remla25-team13/operation)
