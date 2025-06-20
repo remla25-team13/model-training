@@ -125,18 +125,26 @@ jobs:
       - name: Calculate ML Test Score (by test files)
         run: |
           echo "## ML Test Score Summary"
-      
-          count_feature=$(pytest review_rating/tests/test_features_and_data.py | tee tmp.txt | grep -c "PASSED")
-          count_model=$(pytest review_rating/tests/test_model.py | tee tmp.txt | grep -c "PASSED")
-          count_infra=$(pytest review_rating/tests/test_infrastructure.py | tee tmp.txt | grep -c "PASSED")
-          count_monitor=$(pytest review_rating/tests/test_monitoring.py | tee tmp.txt | grep -c "PASSED")
           
+          output=$(pytest review_rating/tests/ | tee tmp.txt)
+
+          count_feature=$(grep -E "test_features_and_data\.py .* PASSED" tmp.txt | wc -l)
+          count_model=$(grep -E "test_model\.py .* PASSED" tmp.txt | wc -l)
+          count_infra=$(grep -E "test_infrastructure\.py .* PASSED" tmp.txt | wc -l)
+          count_monitor=$(grep -E "test_monitoring\.py .* PASSED" tmp.txt | wc -l)
+          
+          echo "Feature tests passed: $count_feature"
+          echo "Model tests passed: $count_model"
+          echo "Infra tests passed: $count_infra"
+          echo "Monitoring tests passed: $count_monitor"
+
           score=0
           [ "$count_feature" -gt 0 ] && score=$((score+1))
           [ "$count_model" -gt 0 ] && score=$((score+1))
           [ "$count_infra" -gt 0 ] && score=$((score+1))
           [ "$count_monitor" -gt 0 ] && score=$((score+1))
       
+          echo $count_feature
           echo "Final ML Test Score: $score/4"
           echo "ml_score=$score" >> $GITHUB_ENV
       
@@ -172,3 +180,4 @@ jobs:
           git commit -m "Update ML Test Score badge and metrics" || echo "No changes to commit"
           git push || echo "Push skipped (e.g. PR build)"
 
+# TRY TESTING IT HERE INSTEAD OF GIT ALSO REPLACE * WITH MAIN
