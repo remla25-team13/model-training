@@ -138,6 +138,24 @@ jobs:
       
           echo "Final ML Test Score: $score/4"
           echo "ml_score=$score" >> $GITHUB_ENV
+
+          # Create ML score badge
+          if [ "$score" -eq 4 ]; then
+            COLOR="brightgreen"
+          elif [ "$score" -eq 3 ]; then
+            COLOR="green"
+          elif [ "$score" -eq 2 ]; then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          BADGE_URL="https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white"
+          BADGE="![ml-score](${BADGE_URL})"
+
+          # Replace existing badge in README.md
+          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md || echo "No ml-score badge found"
+
   
       - name: Save ML score to file
         run: |
