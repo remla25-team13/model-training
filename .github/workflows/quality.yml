@@ -126,19 +126,20 @@ jobs:
         run: |
           echo "## ML Test Score Summary"
       
-          pytest review_rating/tests/test_features_and_data.py | tee >(grep -c "PASSED" > .score_feature)
-          pytest review_rating/tests/test_model.py | tee >(grep -c "PASSED" > .score_model)
-          pytest review_rating/tests/test_infrastructure.py | tee >(grep -c "PASSED" > .score_infra)
-          pytest review_rating/tests/test_monitoring.py | tee >(grep -c "PASSED" > .score_monitor)
+          count_feature=$(pytest review_rating/tests/test_features_and_data.py | tee /dev/tty | grep -c "PASSED")
+          count_model=$(pytest review_rating/tests/test_model.py | tee /dev/tty | grep -c "PASSED")
+          count_infra=$(pytest review_rating/tests/test_infrastructure.py | tee /dev/tty | grep -c "PASSED")
+          count_monitor=$(pytest review_rating/tests/test_monitoring.py | tee /dev/tty | grep -c "PASSED")
       
           score=0
-          [ $(cat .score_feature) -gt 0 ] && score=$((score+1))
-          [ $(cat .score_model) -gt 0 ] && score=$((score+1))
-          [ $(cat .score_infra) -gt 0 ] && score=$((score+1))
-          [ $(cat .score_monitor) -gt 0 ] && score=$((score+1))
+          [ "$count_feature" -gt 0 ] && score=$((score+1))
+          [ "$count_model" -gt 0 ] && score=$((score+1))
+          [ "$count_infra" -gt 0 ] && score=$((score+1))
+          [ "$count_monitor" -gt 0 ] && score=$((score+1))
       
           echo "Final ML Test Score: $score/4"
           echo "ml_score=$score" >> $GITHUB_ENV
+      
 
           # Create ML score badge
           if [ "$score" -eq 4 ]; then
