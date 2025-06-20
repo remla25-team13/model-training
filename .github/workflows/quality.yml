@@ -3,6 +3,7 @@ name: Continuous Integration
 
 on:
   push:
+    # change to main before final deploy
     branches: [ "**" ]  # All branches
 
   pull_request:
