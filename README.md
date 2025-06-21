@@ -1,7 +1,7 @@
 # model-training
 
-![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest&logoColor=white)
-![ml-score](https://img.shields.io/badge/ML%20Test%20Score-4%2F4-brightgreen?logo=pytest&logoColor=white)
+![coverage](https://img.shields.io/badge/Coverage-71%25-yellow?logo=pytest![coverage](https://img.shields.io/badge/Coverage-86%25-green?logo=pytest&logoColor=white)logoColor=white)
+![ml-score](https://img.shields.io/badge/ML%20Test%20Score-4%2F4-brightgreen?logo=pytest![ml-score](https://img.shields.io/badge/ML%20Test%20Score-4%2F4-brightgreen?logo=pytest&logoColor=white)logoColor=white)
 
 
 This repository is part of the REMLA25 project by team 13 and contains the machine learning training pipeline for sentiment analysis on restaurant reviews.
@@ -31,7 +31,7 @@ dvc repro
 We load the dataset automatically through `dvc repro`. For this to work properly, you need to define the `GDRIVE_CREDENTIALS_DATA` environment variable. `GDRIVE_CREDENTIALS_DATA` holds the necessary information to load the Google Cloud Service Account responsible for managing our data.
 
 ## 🔒 Linters Used
-![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)
+![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)logoColor=white)
 ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
 ![Bandit](https://img.shields.io/badge/security-bandit-yellow)
 
