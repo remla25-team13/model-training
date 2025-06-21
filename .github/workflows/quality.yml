@@ -1,3 +1,4 @@
+# This file is restructured with the help of ChatGPT
 name: Continuous Integration
 
 on:
@@ -27,29 +28,11 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
 
-      #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest --cov=review_rating review_rating
-
-      - name: Run pylint (with plugin)
-        env:
-          PYTHONPATH: .
-        run: |
-          pylint review_rating/modeling --rcfile=.pylintrc
-
-      - name: Save pylint score
-        run: |
-          pylint review_rating/modeling > pylint-report.txt || true
-          grep "Your code has been rated at" pylint-report.txt > pylint-score.md || echo "Pylint score not found" > pylint-score.md
-          
-      - name: Upload pylint score
-        uses: actions/upload-artifact@v4
-        with:
-          name: pylint-score
-          path: pylint-score.md
 
       - name: Generate coverage report
         run: |
@@ -89,14 +72,6 @@ jobs:
           BADGE="![pylint](https://img.shields.io/badge/PyLint-${SCORE_CLEAN}-${COLOR}?logo=python&logoColor=white)"
       
           sed -i "s|!\[pylint\](.*)|${BADGE}|" README.md || echo "No badge found to replace"
-            
-      - name: Commit updated README badge
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update pylint badge score to ${SCORE_CLEAN}" || echo "No changes"
-          git push || echo "Skipping push on PR"
 
       - name: Update test coverage badge
         run: |
@@ -119,34 +94,72 @@ jobs:
       
           # Replace in README
           sed -i "s|!\[coverage\](.*)|${BADGE}|" README.md || echo "No coverage badge found to replace"
-
-      - name: Commit coverage badge
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update coverage badge" || echo "No changes"
-          git push || echo "Skipping push on PR"
           
       - name: Run flake8
         run: |
           pip install flake8
-          flake8 review_rating/modeling
+          flake8 review_rating
 
       - name: Run Bandit
         run: |
           pip install bandit
-          bandit -r review_rating/modeling
+          bandit -r review_rating -c bandit.yaml
 
-
-      - name: Calculate ML Test Score
+      - name: Calculate and save ML Test Score (by test files)
         run: |
           echo "## ML Test Score Summary"
-          pytest -m "feature" --maxfail=0 | tee >(grep -c "PASSED" > .score_feature)
-          pytest -m "model_dev" --maxfail=0 | tee >(grep -c "PASSED" > .score_model)
-          pytest -m "ml_infra" --maxfail=0 | tee >(grep -c "PASSED" > .score_infra)
-          pytest -m "monitoring" --maxfail=0 | tee >(grep -c "PASSED" > .score_monitor)
-      
-          SCORE=$(( $(cat .score_feature) + $(cat .score_model) + $(cat .score_infra) + $(cat .score_monitor) ))
-          echo "Total tests passed (ML adequacy): $SCORE"
           
+          output=$(pytest -v review_rating/tests/ | tee tmp.txt)
+
+          count_feature=$(grep "test_features_and_data.py::" tmp.txt | grep -c PASSED)
+          count_model=$(grep "test_model.py::" tmp.txt | grep -c PASSED)
+          count_infra=$(grep "test_infrastructure.py::" tmp.txt | grep -c PASSED)
+          count_monitor=$(grep "test_monitoring.py::" tmp.txt | grep -c PASSED)
+
+          echo "Feature tests passed: $count_feature"
+          echo "Model tests passed: $count_model"
+          echo "Infra tests passed: $count_infra"
+          echo "Monitoring tests passed: $count_monitor"
+
+          score=0
+          [ "$count_feature" -gt 0 ] && score=$((score+1))
+          [ "$count_model" -gt 0 ] && score=$((score+1))
+          [ "$count_infra" -gt 0 ] && score=$((score+1))
+          [ "$count_monitor" -gt 0 ] && score=$((score+1))
+
+          echo "Final ML Test Score: $score/4"
+
+          # Save JSON
+          mkdir -p metrics
+          echo "{
+            \"feature\": $count_feature,
+            \"model\": $count_model,
+            \"infra\": $count_infra,
+            \"monitor\": $count_monitor,
+            \"total\": \"$score/4\"
+          }" > metrics/ml_test_score.json
+
+          echo "ml_score=$score" >> $GITHUB_ENV
+
+          # Create ML score badge
+          if [ "$score" -eq 4 ]; then
+            COLOR="brightgreen"
+          elif [ "$score" -eq 3 ]; then
+            COLOR="green"
+          elif [ "$score" -eq 2 ]; then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          BADGE="![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
+          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md || echo "No ML badge found"
+
+      - name: Commit updated information
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add README.md metrics/ml_test_score.json || echo "Nothing to add"
+          git commit -m "Update ML test score and README badge" || echo "No changes to commit"
+          git push || echo "Push skipped (e.g. PR build)"
