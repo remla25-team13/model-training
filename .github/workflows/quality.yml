@@ -3,7 +3,6 @@ name: Continuous Integration
 
 on:
   push:
-    # change to main before final deploy
     branches: [ "**" ]  # All branches
 
   pull_request:
@@ -180,5 +179,3 @@ jobs:
           git add README.md metrics/ml_score.txt || echo "Nothing to add"
           git commit -m "Update ML Test Score badge and metrics" || echo "No changes to commit"
           git push || echo "Push skipped (e.g. PR build)"
-
-# TRY TESTING IT HERE INSTEAD OF GIT ALSO REPLACE * WITH MAIN
