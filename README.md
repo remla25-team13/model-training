@@ -30,6 +30,28 @@ dvc repro
 ### Loading the dataset
 We load the dataset automatically through `dvc repro`. For this to work properly, you need to define the `GDRIVE_CREDENTIALS_DATA` environment variable. `GDRIVE_CREDENTIALS_DATA` holds the necessary information to load the Google Cloud Service Account responsible for managing our data.
 
+## Project Overview
+
+![cookiecutter](https://img.shields.io/badge/CCDS-template-blue?logo=cookiecutter&logoColor=yellow)
+```
+model-training/
+├── .github/               # CI configuration and workflows
+├── data/                  # DVC-managed input/output data (not tracked in Git)
+├── metrics/               # Evaluation metrics and ML test score output
+├── review_rating/         # Main source code for model, pipeline, and tests
+│   ├── __init__.py
+│   ├── data/              # Data loading & preprocessing
+│   ├── modeling/          # Model training and evaluation
+│   ├── tests/             # Unit and integration tests
+│   └── utils.py           # Reusable utilities
+├── dvc.yaml               # DVC pipeline definition
+├── Dockerfile             # Container setup for training environment
+├── requirements.txt       # Runtime dependencies
+├── requirements-dev.txt   # Dev dependencies (linters, test tools)
+├── pyproject.toml         # Pylint config and tool integration
+└── README.md              # Project documentation
+```
+
 ## 🔒 Linters Used
 ![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)logoColor=white)
 ![Flake8](https://img.shields.io/badge/code%20style-flake8-blue)
@@ -39,8 +61,31 @@ We load the dataset automatically through `dvc repro`. For this to work properly
 - **Flake8** with a non-default configuration: increased line length, common ignore rules
 - **Bandit** with a tailored `bandit.yaml` to focus on relevant Python security risks
 
-All linters are run automatically in the GitHub Actions workflow.
+This project enforces code quality through three linters, all run automatically in the **GitHub Actions workflow** defined in [`quality.yml`](.github/workflows/quality.yml):
 
+### ✅ How They Are Run
+
+- **Pylint**
+  - Run with:
+    ```bash
+    PYTHONPATH=. pylint review_rating --rcfile=.pylintrc
+    ```
+  - Includes a custom plugin (`pylint_plugins/ml_checks.py`) that detects machine learning-specific code smells.
+  - The Pylint score is parsed in CI and used to update the README badge.
+
+- **Flake8**
+  - Run with:
+    ```bash
+    flake8 review_rating
+    ```
+  - Configured via `requirements-dev.txt` with extended line length and common ignore rules.
+
+- **Bandit**
+  - Run with:
+    ```bash
+    bandit -r review_rating -c bandit.yaml
+    ```
+  - Uses a tailored config to detect security issues relevant to ML workflows.
 
 ## 🤖 Custom Pylint Rules for ML Code Smells
 
