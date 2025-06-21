@@ -136,7 +136,7 @@ jobs:
             \"model\": $count_model,
             \"infra\": $count_infra,
             \"monitor\": $count_monitor,
-            \"total\": $score
+            \"total\": \"$score/4\"
           }" > metrics/ml_test_score.json
 
           echo "ml_score=$score" >> $GITHUB_ENV
@@ -155,11 +155,6 @@ jobs:
           BADGE="![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
           sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md || echo "No ML badge found"
 
-          
-      - name: Save ML score to file
-        run: |
-          echo "$score" > ml_score.txt
-     
       - name: Commit updated information
         run: |
           git config user.name github-actions
