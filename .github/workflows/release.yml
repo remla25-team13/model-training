@@ -13,6 +13,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS }}
+
 
     steps:
     - name: Checkout repo
@@ -46,10 +49,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
-    - name: Automatically download the dataset
-      run:
-        wget -O data/raw/a1_RestaurantReviews_HistoricDump.tsv https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
 
     - name: Run training
       run: |

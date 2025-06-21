@@ -1,48 +1,40 @@
 schema: '2.0'
 stages:
-  get_data:
-    cmd: wget -O a1_RestaurantReviews_HistoricDump.tsv 
-      https://github.com/proksch/restaurant-sentiment/raw/refs/heads/main/a1_RestaurantReviews_HistoricDump.tsv
-    outs:
-    - path: a1_RestaurantReviews_HistoricDump.tsv
-      hash: md5
-      md5: 102f1f4193e0bdebdd6cce7f13e0a839
-      size: 54686
   preprocess:
-    cmd: python -m review_rating.modeling prepare a1_RestaurantReviews_HistoricDump.tsv
-      -o output -t 0.1
+    cmd: python -m review_rating.modeling prepare output/reviews.tsv -o output -t
+      0.1
     deps:
     - path: review_rating/
       hash: md5
-      md5: 65a2bc99434b2e31d9c5fcdd09f0e513.dir
-      size: 57525
-      nfiles: 27
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
+      nfiles: 25
     outs:
     - path: output/processed_data.pk1
       hash: md5
-      md5: 6be8c05aa5c9bab7db095e9564dc6288
+      md5: 3778dae09f06e0de5a48e46cb32c8326
       size: 10231603
     - path: output/vectorizer.pkl
       hash: md5
-      md5: 5f5b5a90a88bc2076ed64357a978d490
-      size: 40162
+      md5: 56d7ca9b06439764d12ae2e7eadcb064
+      size: 40298
   train:
     cmd: python -m review_rating.modeling train --input-dir output --output-model
       output/
     deps:
     - path: review_rating/
       hash: md5
-      md5: 65a2bc99434b2e31d9c5fcdd09f0e513.dir
-      size: 57525
-      nfiles: 27
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
+      nfiles: 25
     outs:
     - path: output/model-gauss.jbl
       hash: md5
-      md5: 1785e51e8d180acdbd94e2a5401be63e
+      md5: 1da72370acf4cabd6632486f571aeab0
       size: 46215
     - path: output/model-multi.jbl
       hash: md5
-      md5: 56dc8bb05b951cba03c37c18c5dcacb0
+      md5: acc107462283d75ce8a87ad01492ccf6
       size: 46231
   analyze:
     cmd: python -m review_rating.modeling evaluate --input-dir output --model-path
@@ -50,11 +42,11 @@ stages:
     deps:
     - path: review_rating/
       hash: md5
-      md5: 65a2bc99434b2e31d9c5fcdd09f0e513.dir
-      size: 57525
-      nfiles: 27
+      md5: 54e903efc1869717d738d8e40ad0dbda.dir
+      size: 53064
+      nfiles: 25
     outs:
     - path: output/metrics.json
       hash: md5
-      md5: cc6fc10af3ecd0531bef148d9c35b3d7
+      md5: 5c97e85129bdd3e1d991f3ba3743e11a
       size: 290
