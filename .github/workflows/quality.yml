@@ -105,7 +105,7 @@ jobs:
           pip install bandit
           bandit -r review_rating -c bandit.yaml
 
-      - name: Calculate ML Test Score (by test files)
+      - name: Calculate and save ML Test Score (by test files)
         run: |
           echo "## ML Test Score Summary"
           
@@ -116,7 +116,6 @@ jobs:
           count_infra=$(grep "test_infrastructure.py::" tmp.txt | grep -c PASSED)
           count_monitor=$(grep "test_monitoring.py::" tmp.txt | grep -c PASSED)
 
-          
           echo "Feature tests passed: $count_feature"
           echo "Model tests passed: $count_model"
           echo "Infra tests passed: $count_infra"
@@ -127,11 +126,20 @@ jobs:
           [ "$count_model" -gt 0 ] && score=$((score+1))
           [ "$count_infra" -gt 0 ] && score=$((score+1))
           [ "$count_monitor" -gt 0 ] && score=$((score+1))
-      
-          echo $count_feature
+
           echo "Final ML Test Score: $score/4"
+
+          # Save JSON
+          mkdir -p metrics
+          echo "{
+            \"feature\": $count_feature,
+            \"model\": $count_model,
+            \"infra\": $count_infra,
+            \"monitor\": $count_monitor,
+            \"total\": $score
+          }" > metrics/ml_test_score.json
+
           echo "ml_score=$score" >> $GITHUB_ENV
-      
 
           # Create ML score badge
           if [ "$score" -eq 4 ]; then
@@ -144,22 +152,19 @@ jobs:
             COLOR="red"
           fi
 
-          BADGE_URL="https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white"
           BADGE="![ml-score](https://img.shields.io/badge/ML%20Test%20Score-${score}%2F4-${COLOR}?logo=pytest&logoColor=white)"
-          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md
-            
+          sed -i "s|!\[ml-score\](.*)|${BADGE}|" README.md || echo "No ML badge found"
+
+          
       - name: Save ML score to file
         run: |
           echo "$score" > ml_score.txt
      
       - name: Commit updated information
         run: |
-          mkdir -p metrics
-          mv ml_score.txt metrics/ml_score.txt
-
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git add README.md metrics/ml_score.txt || echo "Nothing to add"
-          git commit -m "Updated badges in README!" || echo "No changes to commit"
+          git add README.md metrics/ml_test_score.json || echo "Nothing to add"
+          git commit -m "Update ML test score and README badge" || echo "No changes to commit"
           git push || echo "Push skipped (e.g. PR build)"
