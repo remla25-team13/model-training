@@ -26,7 +26,6 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
 
-      #basic pytest and pylint, will be extended later
       - name: Run tests with coverage
         env:
           PYTHONPATH: ${{ github.workspace }}
@@ -71,14 +70,6 @@ jobs:
           BADGE="![pylint](https://img.shields.io/badge/PyLint-${SCORE_CLEAN}-${COLOR}?logo=python&logoColor=white)"
       
           sed -i "s|!\[pylint\](.*)|${BADGE}|" README.md || echo "No badge found to replace"
-            
-      - name: Commit updated README badge
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update pylint badge score to ${SCORE_CLEAN}" || echo "No changes"
-          git push || echo "Skipping push on PR"
 
       - name: Update test coverage badge
         run: |
@@ -101,14 +92,6 @@ jobs:
       
           # Replace in README
           sed -i "s|!\[coverage\](.*)|${BADGE}|" README.md || echo "No coverage badge found to replace"
-
-      - name: Commit coverage badge
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update coverage badge" || echo "No changes"
-          git push || echo "Skipping push on PR"
           
       - name: Run flake8
         run: |
@@ -119,7 +102,6 @@ jobs:
         run: |
           pip install bandit
           bandit -r review_rating -c bandit.yaml
-
 
       - name: Calculate ML Test Score (by test files)
         run: |
@@ -168,7 +150,7 @@ jobs:
         run: |
           echo "$score" > ml_score.txt
      
-      - name: Commit updated ML score and badge (only on main)
+      - name: Commit updated information
         run: |
           mkdir -p metrics
           mv ml_score.txt metrics/ml_score.txt
@@ -177,5 +159,5 @@ jobs:
           git config user.email github-actions@github.com
 
           git add README.md metrics/ml_score.txt || echo "Nothing to add"
-          git commit -m "Update ML Test Score badge and metrics" || echo "No changes to commit"
+          git commit -m "Updated badges in README!" || echo "No changes to commit"
           git push || echo "Push skipped (e.g. PR build)"
