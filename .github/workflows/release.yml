@@ -60,8 +60,8 @@ jobs:
         name: training-artifacts
         path: |
           output/vectorizer.pkl
-          output/model-gauss.pkl
-          output/model-multi.pkl
+          output/model-gauss.jbl
+          output/model-multi.jbl
       if: github.ref_type == 'tag' || github.ref == 'refs/heads/main'
 
 
@@ -80,7 +80,7 @@ jobs:
         prerelease: ${{ steps.get_version.outputs.prerelease }}
         make_latest: ${{ steps.get_version.outputs.tagged }}
         files: |
-          vectorizer.pkl
-          model-gauss.pkl
-          model-multi.pkl
+          output/vectorizer.pkl
+          output/model-gauss.pkl
+          output/model-multi.pkl
       if: github.ref_type == 'tag' || github.ref == 'refs/heads/main'
