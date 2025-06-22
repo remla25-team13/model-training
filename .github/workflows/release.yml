@@ -81,6 +81,6 @@ jobs:
         make_latest: ${{ steps.get_version.outputs.tagged }}
         files: |
           output/vectorizer.pkl
-          output/model-gauss.pkl
-          output/model-multi.pkl
+          output/model-gauss.jbl
+          output/model-multi.jbl
       if: github.ref_type == 'tag' || github.ref == 'refs/heads/main'
