@@ -1,5 +1,5 @@
 """
-This module contains tests for monitoring model performance and data drift.
+This module contains tests for monitoring model performance and data drift. (VS copilot helped writing these comments.)
 Functions:
     test_prediction_drift(split_data, classifier):
         Tests whether the classifier's prediction accuracy on the test set
