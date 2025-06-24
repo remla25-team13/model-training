@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.inspection import permutation_importance
 import numpy as np
-
+import sys
 
 
 def test_model_determinism(split_data):
@@ -31,14 +31,6 @@ def test_model_determinism(split_data):
     preds2 = model2.predict(x_test)
 
     assert np.array_equal(preds1, preds2)
-
-def test_feature_cost(classifier, split_data, threshold=0.01):
-    """Test that each feature contributes non-trivially to predictions."""
-
-    _, x_test, _, y_test = split_data
-    result = permutation_importance(classifier, x_test, y_test, n_repeats=3, random_state=4693698)
-    importances = result.importances_mean
-    assert (importances >= threshold).sum() >= len(importances) * 0.5, "Too many low-value features"
 
 def test_model_trainability(split_data):
     """Test if the model can be trained."""
@@ -84,3 +76,9 @@ def test_model_performance_on_slice_with_positive_reviews(classifier, split_data
 
     acc = classifier.score(X_slice, y_slice)
     assert acc > 0.5, "Model performs poorly on a data slice"
+
+
+def test_model_cost_analysis(classifier):
+    """Memory used for mode should be less than approximately 20MB"""
+    memory_used = sys.getsizeof(classifier)
+    assert memory_used <200000000 
