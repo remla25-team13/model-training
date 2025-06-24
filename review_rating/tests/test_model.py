@@ -14,6 +14,22 @@ Functions:
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.inspection import permutation_importance
+import numpy as np
+
+
+def test_model_determinism(split_data):
+    """Ensure consistent predictions across repeated training."""
+    x_train, x_test, y_train, _ = split_data
+
+    model1 = GaussianNB()
+    model1.fit(x_train, y_train)
+    preds1 = model1.predict(x_test)
+
+    model2 = GaussianNB()
+    model2.fit(x_train, y_train)
+    preds2 = model2.predict(x_test)
+
+    assert np.array_equal(preds1, preds2)
 
 def test_feature_cost(classifier, X_test, y_test, threshold=0.01):
     """Test that each feature contributes non-trivially to predictions."""
@@ -36,7 +52,7 @@ def test_model_accuracy(split_data, classifier):
     acc = accuracy_score(y_test, y_pred)
     assert acc > 0.6
 
-def test_model_performance_on_slice_with_short_reviews(model, X_test, y_test):
+def test_model_performance_on_slice_with_short_reviews(classifier, X_test, y_test):
     """Test model performance on data slices with reviews with less than 20 characters"""
     slice_fn = lambda X: X["Review"].str.len() < 20
     indices = slice_fn(X_test)
@@ -46,10 +62,10 @@ def test_model_performance_on_slice_with_short_reviews(model, X_test, y_test):
     if len(X_slice) == 0:
         return  # No data in this slice, skip
 
-    acc = model.score(X_slice, y_slice)
+    acc = classifier.score(X_slice, y_slice)
     assert acc > 0.5, "Model performs poorly on a data slice"
 
-def test_model_performance_on_slice_with_long_reviews(model, X_test, y_test):
+def test_model_performance_on_slice_with_long_reviews(classifier, X_test, y_test):
     """Test model performance on data slices with reviews of more than 100 characters"""
     slice_fn = lambda X: X["Review"].str.len() > 100
     indices = slice_fn(X_test)
@@ -59,5 +75,5 @@ def test_model_performance_on_slice_with_long_reviews(model, X_test, y_test):
     if len(X_slice) == 0:
         return  # No data in this slice, skip
 
-    acc = model.score(X_slice, y_slice)
+    acc = classifier.score(X_slice, y_slice)
     assert acc > 0.5, "Model performs poorly on a data slice"
