@@ -12,7 +12,15 @@ Functions:
 
 import numpy as np
 from sklearn.metrics import accuracy_score
+import time
 
+def test_prediction_time(classifier, X_test, max_time=0.1):
+    """Ensure predictions complete within 100ms per sample."""
+    start = time.time()
+    classifier.predict(X_test)
+    duration = time.time() - start
+    time_per_sample = duration / len(X_test)
+    assert time_per_sample < max_time
 
 def test_prediction_drift(split_data, classifier):
     """
