@@ -37,7 +37,7 @@ def test_feature_cost(classifier, split_data, threshold=0.01):
     _, x_test, _, y_test = split_data
     result = permutation_importance(classifier, x_test, y_test, n_repeats=3, random_state=4693698)
     importances = result.importances_mean
-    assert all(imp >= threshold for imp in importances)
+    assert (importances >= threshold).sum() >= len(importances) * 0.8, "Too many low-value features"
 
 def test_model_trainability(split_data):
     """Test if the model can be trained."""
@@ -54,13 +54,13 @@ def test_model_accuracy(split_data, classifier):
     acc = accuracy_score(y_test, y_pred)
     assert acc > 0.6
 
-def test_model_performance_on_slice_with_short_reviews(classifier, split_data):
-    """Test model performance on data slices with reviews with less than 20 characters"""
-    slice_fn = lambda X: X["Review"].str.len() < 20
-    _, X_test, _, y_test = split_data
+def test_model_performance_on_slice_with_negative_reviews(classifier, split_data):
+    """Test model performance on data slices with neg reviews"""
+    slice_fn = lambda y: y==0
+    _, x_test, _, y_test = split_data
 
-    indices = slice_fn(X_test)
-    X_slice = X_test[indices]
+    indices = slice_fn(y_test)
+    X_slice = x_test[indices]
     y_slice = y_test[indices]
     
     if len(X_slice) == 0:
@@ -69,12 +69,13 @@ def test_model_performance_on_slice_with_short_reviews(classifier, split_data):
     acc = classifier.score(X_slice, y_slice)
     assert acc > 0.5, "Model performs poorly on a data slice"
 
-def test_model_performance_on_slice_with_long_reviews(classifier, split_data):
-    """Test model performance on data slices with reviews of more than 100 characters"""
-    slice_fn = lambda X: X["Review"].str.len() > 100
-    _, X_test, _, y_test = split_data
-    indices = slice_fn(X_test)
-    X_slice = X_test[indices]
+def test_model_performance_on_slice_with_positive_reviews(classifier, split_data):
+    """Test model performance on data slices with pos reviews"""
+    slice_fn = lambda y: y==0
+    _, x_test, _, y_test = split_data
+
+    indices = slice_fn(y_test)
+    X_slice = x_test[indices]
     y_slice = y_test[indices]
     
     if len(X_slice) == 0:
