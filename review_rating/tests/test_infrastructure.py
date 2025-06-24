@@ -2,6 +2,7 @@
 
 import os
 import joblib
+import time
 
 
 MODEL_PATH_A = "processed/model-gauss.jbl"
@@ -36,3 +37,6 @@ def test_prediction_pipeline(preprocessor):
         X = vec.transform([processed]).toarray()
         pred = model.predict(X)
         assert pred[0] in [0, 1]
+
+
+
