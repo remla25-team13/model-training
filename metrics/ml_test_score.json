@@ -1,7 +1,7 @@
 {
-  "feature": 2,
-  "model": 2,
+  "feature": 3,
+  "model": 6,
   "infra": 3,
-  "monitor": 2,
+  "monitor": 3,
   "total": "4/4"
 }
