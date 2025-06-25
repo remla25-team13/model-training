@@ -36,4 +36,3 @@ def test_prediction_pipeline(preprocessor):
         X = vec.transform([processed]).toarray()
         pred = model.predict(X)
         assert pred[0] in [0, 1]
-

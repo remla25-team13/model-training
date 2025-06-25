@@ -18,4 +18,3 @@ def test_feature_cost_analysis(vectorizer):
     """Memory used for features should be less than approximately 10MB"""
     memory_used = sys.getsizeof(vectorizer)
     assert memory_used < 100000000
-

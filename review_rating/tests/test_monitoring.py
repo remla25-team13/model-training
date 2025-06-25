@@ -61,4 +61,3 @@ def test_data_distribution_drift(split_data):
     test_mean = np.mean(x_test, axis=0)
     drift = np.abs(train_mean - test_mean)
     assert np.mean(drift) < 0.1
-
