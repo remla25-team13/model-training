@@ -81,4 +81,4 @@ def test_model_performance_on_slice_with_positive_reviews(classifier, split_data
 def test_model_cost_analysis(classifier):
     """Memory used for mode should be less than approximately 20MB"""
     memory_used = sys.getsizeof(classifier)
-    assert memory_used < 200000000 
+    assert memory_used < 200000000
