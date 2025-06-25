@@ -13,7 +13,6 @@ Functions:
 
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
-from sklearn.inspection import permutation_importance
 import numpy as np
 import sys
 
@@ -32,6 +31,7 @@ def test_model_determinism(split_data):
 
     assert np.array_equal(preds1, preds2)
 
+
 def test_model_trainability(split_data):
     """Test if the model can be trained."""
     x_train, _, y_train, _ = split_data
@@ -45,14 +45,14 @@ def test_model_accuracy(split_data, classifier):
     _, X_test, _, y_test = split_data
     y_pred = classifier.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
-    assert acc > 0.6
+    assert acc > 0.6 
+
 
 def test_model_performance_on_slice_with_negative_reviews(classifier, split_data):
     """Test model performance on data slices with neg reviews"""
-    slice_fn = lambda y: y==0
     _, x_test, _, y_test = split_data
 
-    indices = slice_fn(y_test)
+    indices = (y_test == 0)
     X_slice = x_test[indices]
     y_slice = y_test[indices]
     
@@ -62,12 +62,12 @@ def test_model_performance_on_slice_with_negative_reviews(classifier, split_data
     acc = classifier.score(X_slice, y_slice)
     assert acc > 0.5, "Model performs poorly on a data slice"
 
+
 def test_model_performance_on_slice_with_positive_reviews(classifier, split_data):
     """Test model performance on data slices with pos reviews"""
-    slice_fn = lambda y: y==0
     _, x_test, _, y_test = split_data
 
-    indices = slice_fn(y_test)
+    indices = slice_fn(y_test == 1)
     X_slice = x_test[indices]
     y_slice = y_test[indices]
     
@@ -81,4 +81,5 @@ def test_model_performance_on_slice_with_positive_reviews(classifier, split_data
 def test_model_cost_analysis(classifier):
     """Memory used for mode should be less than approximately 20MB"""
     memory_used = sys.getsizeof(classifier)
-    assert memory_used <200000000 
+    assert memory_used < 200000000
+    
