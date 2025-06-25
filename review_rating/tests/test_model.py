@@ -67,7 +67,7 @@ def test_model_performance_on_slice_with_positive_reviews(classifier, split_data
     """Test model performance on data slices with pos reviews"""
     _, x_test, _, y_test = split_data
 
-    indices = slice_fn(y_test == 1)
+    indices = (y_test == 1)
     X_slice = x_test[indices]
     y_slice = y_test[indices]
     
