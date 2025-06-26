@@ -1,4 +1,4 @@
-lib_ml @ git+https://github.com/remla25-team13/lib-ml.git@v1.0.1-dev1
+lib_ml @ git+https://github.com/remla25-team13/lib-ml.git
 loguru
 pandas
 scikit-learn
