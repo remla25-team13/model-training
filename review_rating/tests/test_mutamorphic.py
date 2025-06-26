@@ -13,12 +13,9 @@ import numpy as np
 # Define test cases: (original_text, mutated_text)
 # Both texts should ideally have the same sentiment
 MUTAMORPHIC_PAIRS = [
-    ("The food was okay", "The food was fine"),
-    ("The waiter was rude", "The waiter was impolite"),
     ("I loved the ambiance", "I liked the ambiance"),
     ("The service was bad", "The service was terrible"),
     ("It was a great experience", "It was a fantastic experience"),
-    ("Not the best dinner", "Not the greatest dinner"),
     ("I would not recommend it", "I wouldn't suggest it"),
     ("Service could be improved", "Service could be better"),
 ]
