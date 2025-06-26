@@ -7,7 +7,6 @@ contextual changes such as synonym replacements.
 
 import pytest
 import joblib
-import numpy as np
 
 
 # Define test cases: (original_text, mutated_text)
