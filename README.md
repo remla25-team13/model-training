@@ -28,7 +28,7 @@ dvc repro
 ```
 
 ### Loading the dataset
-We load the dataset automatically through `dvc repro`. For this to work properly, you need to define the `GDRIVE_CREDENTIALS_DATA` environment variable. `GDRIVE_CREDENTIALS_DATA` holds the necessary information to load the Google Cloud Service Account responsible for managing our data.
+We load the dataset automatically through `dvc repro`. For this to work properly, you need to define the `GDRIVE_CREDENTIALS_DATA` environment variable. `GDRIVE_CREDENTIALS_DATA` holds the necessary information to load the Google Cloud Service Account responsible for managing our data. In general, we do not provide our Google drive credentials, but you might have gotten access to them though our submission. Besides exporting an environment variable, you can run `dvc remote modify gdrive gdrive_user_credentials_file PATH_TO_CREDENTIALS`.
 
 ## Project Overview
 
